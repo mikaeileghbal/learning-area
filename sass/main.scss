@@ -1,5 +1,5 @@
-@import "./resets";
 @import "./variables";
+@import "./resets";
 
 @function weight($weight-name) {
   @return map-get($map: $font-weights, $key: $weight-name);
@@ -25,10 +25,30 @@
   }
 }
 
+@mixin double-container($max-width) {
+  max-width: $max-width;
+  margin: {
+    bottom: 0;
+    top: 0;
+    left: auto;
+    right: auto;
+  }
+}
+
+:root {
+  --primary: #{$primary-color};
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: $primary-color;
-  color: white;
+}
+
+$rounded-corners: false;
+.button {
+  border: 1px solid black;
+  border-radius: if($rounded-corners, 5px, null);
+  padding: 16px;
 }
 
 .main {
@@ -60,4 +80,8 @@ body {
 
 .light {
   @include theme(true);
+}
+
+.double-container {
+  @include double-container($max-width);
 }
