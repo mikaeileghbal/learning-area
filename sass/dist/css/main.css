@@ -74,4 +74,51 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+.action-buttons, .reset-buttons {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 16px 0;
+  width: 150px;
+}
+
+.action-buttons:hover, .reset-buttons:hover {
+  border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.action-buttons {
+  color: #4285f4;
+}
+
+.reset-buttons {
+  color: #cddc39;
+}
+
+.pulse {
+  -webkit-animation-name: inline-u16ac713d;
+          animation-name: inline-u16ac713d;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes inline-u16ac713d {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}
+
+@keyframes inline-u16ac713d {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}
 /*# sourceMappingURL=main.css.map */
