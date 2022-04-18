@@ -1,0 +1,124 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: white;
+}
+
+:root {
+  --primary: #272727;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #272727;
+}
+
+.button {
+  border: 1px solid black;
+  padding: 16px;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.main .main__paragraph1, .main .main__paragraph2 {
+  font-weight: 700;
+}
+
+.main .main__paragraph1:hover, .main .main__paragraph2:hover {
+  color: pink;
+}
+
+.main .main__paragraph2:hover {
+  color: red;
+}
+
+@media screen and (max-width: 800px) {
+  .main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+.double-container {
+  max-width: 1048px;
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.action-buttons, .reset-buttons {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 16px 0;
+  width: 150px;
+}
+
+.action-buttons:hover, .reset-buttons:hover {
+  border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.action-buttons {
+  color: #4285f4;
+}
+
+.reset-buttons {
+  color: #cddc39;
+}
+
+.pulse {
+  -webkit-animation-name: inline-u16ac713d;
+          animation-name: inline-u16ac713d;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes inline-u16ac713d {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}
+
+@keyframes inline-u16ac713d {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}
+/*# sourceMappingURL=main.css.map */
