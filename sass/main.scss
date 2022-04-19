@@ -1,0 +1,135 @@
+@import "./variables";
+@import "./resets";
+
+@function weight($weight-name) {
+  @return map-get($map: $font-weights, $key: $weight-name);
+}
+
+@mixin flexCenter($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin theme($light-theme: true) {
+  @if $light-theme {
+    background-color: lighten($color: $primary-color, $amount: 100%);
+    color: darken($color: $text-color, $amount: 100%);
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin double-container($max-width) {
+  max-width: $max-width;
+  margin: {
+    bottom: 0;
+    top: 0;
+    left: auto;
+    right: auto;
+  }
+}
+
+:root {
+  --primary: #{$primary-color};
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $primary-color;
+}
+
+$rounded-corners: false;
+.button {
+  border: 1px solid black;
+  border-radius: if($rounded-corners, 5px, null);
+  padding: 16px;
+}
+
+.main {
+  @include flexCenter(row);
+  width: 100% - 40%;
+  margin: 0 auto;
+
+  #{&}__paragraph1 {
+    //font-weight: map-get($map: $font-weights, $key: bold);
+    font-weight: weight(bold);
+
+    &:hover {
+      color: pink;
+    }
+  }
+
+  #{&}__paragraph2 {
+    @extend .main__paragraph1;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.light {
+  @include theme(true);
+}
+
+.double-container {
+  @include double-container($max-width);
+}
+
+// Placeholder selectors
+
+%toolbelt {
+  box-sizing: border-box;
+  border-top: 1px solid rgba(#000, 0.12);
+  padding: 16px 0;
+  width: 150px;
+
+  &:hover {
+    border: 2px solid rgba(#000, 0.5);
+  }
+}
+
+.action-buttons {
+  @extend %toolbelt;
+  color: #4285f4;
+}
+
+.reset-buttons {
+  @extend %toolbelt;
+  color: #cddc39;
+}
+
+// interpolation
+
+@mixin inline-animation($duration) {
+  $name: inline-#{unique-id()};
+
+  @keyframes #{$name} {
+    @content;
+  }
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-iteration-count: infinite;
+}
+
+.pulse {
+  @include inline-animation(2s) {
+    from {
+      background-color: yellow;
+    }
+    to {
+      background-color: red;
+    }
+  }
+}
