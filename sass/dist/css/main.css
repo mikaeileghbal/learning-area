@@ -1,0 +1,10 @@
+[class^="container"] {
+  background-color: red;
+}
+
+.col {
+  padding: 8px;
+  background-color: aliceblue;
+  border: 1px solid silver;
+}
+/*# sourceMappingURL=main.css.map */
