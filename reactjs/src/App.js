@@ -15,11 +15,7 @@ function App() {
           <Welcome name="Smith" />
         </div>
         <div className="component-container">
-          <Comment
-            author={{ name: "Michael", avatarurl: "./images/male.png" }}
-            text="new commen"
-            date="2022"
-          />
+          <Comment />
         </div>
         <div className="component-container">
           <h2 className="underline">Popular Products</h2>

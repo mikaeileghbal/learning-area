@@ -21,17 +21,17 @@ const comments = [
 
 function Comment(props) {
   return (
-    <>
+    <div className="comment-container">
       {comments.map((comment) => {
         return (
-          <>
+          <div className="comment">
             <UserInfo user={comment.user} />
             <div className="comment-text">{comment.text}</div>
             <div className="comment-date">{comment.date}</div>
-          </>
+          </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

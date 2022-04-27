@@ -1,0 +1,38 @@
+export const products = [
+  {
+    id: 1,
+    title: "Yellow Pail",
+    description: "On-demand sand castle construction expertise.",
+    url: "#",
+    votes: 10,
+    submitterAvatarUrl: "images/male.png",
+    productImageUrl: "images/product-01.png",
+  },
+  {
+    id: 2,
+    title: "Supermajority",
+    description: "Earn points while playing game.",
+    url: "#",
+    votes: 23,
+    submitterAvatarUrl: "images/female.png",
+    productImageUrl: "images/product-02.png",
+  },
+  {
+    id: 3,
+    title: "Tinfoild",
+    description: "We already have your measurments.",
+    url: "#",
+    votes: 20,
+    submitterAvatarUrl: "images/male.png",
+    productImageUrl: "images/product-01.png",
+  },
+  {
+    id: 4,
+    title: "Hough or Nought",
+    description: "High-minded or absend-minded?",
+    url: "#",
+    votes: 18,
+    submitterAvatarUrl: "images/female.png",
+    productImageUrl: "images/product-02.png",
+  },
+];
