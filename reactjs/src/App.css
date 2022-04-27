@@ -40,13 +40,13 @@
 /* comment component styles */
 
 .comment-container {
-  display: flex;
 }
 
 .comment {
   margin: 0 8px;
   background-color: #efefef;
   padding: 8px 16px;
+  margin-bottom: 8px;
 }
 
 img {
