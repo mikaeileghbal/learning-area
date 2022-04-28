@@ -65,6 +65,8 @@ img {
 }
 .underline {
   border-bottom: 1px solid silver;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .item {
