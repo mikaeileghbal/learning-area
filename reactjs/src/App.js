@@ -1,6 +1,7 @@
 import "./App.css";
 import Comment from "./components/Comment";
-import ProductList from "./components/UpVote/ProductList";
+import ProductList from "./components/up-vote/ProductList";
+import TimerDashboard from "./components/time-tracker/TimerDashboard";
 
 function App() {
   return (
@@ -10,11 +11,13 @@ function App() {
       </header>
       <main className="app-main">
         <div className="component-container">
+          <h2 className="underline">Simple Hello</h2>
           <Welcome name="Sara" />
           <Welcome name="Joe" />
           <Welcome name="Smith" />
         </div>
         <div className="component-container">
+          <h2 className="underline">Comment</h2>
           <Comment />
         </div>
         <div className="component-container">
@@ -22,6 +25,10 @@ function App() {
           <div className="content">
             <ProductList />
           </div>
+        </div>
+        <div className="component-container">
+          <h2 className="underline">Timer Tracker</h2>
+          <TimerDashboard />
         </div>
       </main>
     </div>

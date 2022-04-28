@@ -9,20 +9,15 @@ const ProductList = () => {
   console.log("Rendering");
 
   const handleProductUpVote = (productId) => {
-    console.log(productId);
     const newList = list.map((item) => {
       if (item.id === productId) {
-        const obj = Object.assign({}, item, { votes: item.votes + 1 });
-        console.log(obj);
         return { ...item, votes: item.votes + 1 };
       } else {
         return item;
       }
     });
-    console.log(newList);
 
     setList(newList);
-    console.log("set");
   };
 
   return (
@@ -40,8 +35,6 @@ const ProductList = () => {
           onVote={handleProductUpVote}
         />
       ))}
-
-      <p>welcome</p>
     </div>
   );
 };
@@ -72,7 +65,6 @@ const Product = (props) => {
           <span>Submited by:</span>
           <img src={props.submitterAvatarUrl} alt=""></img>
         </div>
-        <p>id: {props.id}</p>
       </div>
     </div>
   );
