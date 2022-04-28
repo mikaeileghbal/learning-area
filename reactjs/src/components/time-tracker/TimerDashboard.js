@@ -1,45 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
+import { v4 } from "uuid";
 
 const TimerDashboard = () => {
+  const state = {
+    timers: [
+      {
+        title: "Practice squat",
+        project: "Gym Chores",
+        id: v4(),
+        elapsed: 5456099,
+        runningSince: Date.now(),
+      },
+      {
+        title: "Bake squash",
+        project: "Kitchen Chores",
+        id: v4(),
+        elapsed: 1273998,
+        runningSince: null,
+      },
+    ],
+  };
+
   return (
     <>
       <div>
-        <EditableTimerList />
-        <ToggleableTimerForm isOpen={false} />
+        <EditableTimerList timers={state.timers} />
+        <ToggleableTimerForm />
       </div>
     </>
   );
 };
 
-const EditableTimerList = () => {
-  return (
-    <div id="timer">
+const EditableTimerList = ({ timers }) => {
+  const timersComp = timers.map((timer) => {
+    return (
       <EditableTimer
-        title="Learn React"
-        peoject="Project1"
-        elapsed="89866300"
-        runningsince={null}
-        editFormOpen={true}
+        key={timer.id}
+        id={timer.id}
+        title={timer.title}
+        project={timer.project}
+        elapsed={timer.elapsed}
+        runningsince={timer.runningSince}
       />
-      <EditableTimer
-        title="Learn React"
-        project="Project2"
-        elapsed="89866300"
-        runningsince={null}
-        editFormOpen={false}
-      />
-    </div>
-  );
+    );
+  });
+  return <div id="timer">{timersComp}</div>;
 };
 
-const ToggleableTimerForm = ({ isOpen = true }) => {
+const ToggleableTimerForm = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleFormOpen = (e) => {
+    setIsOpen(true);
+  };
+
   if (isOpen) {
     return <TimerForm />;
   } else {
     return (
       <div className="content">
-        <button className="button icon">
+        <button className="button icon" onClick={() => handleFormOpen()}>
           <i className="fa fa-plus"></i>
         </button>
       </div>
@@ -47,22 +68,23 @@ const ToggleableTimerForm = ({ isOpen = true }) => {
   }
 };
 
-const EditableTimer = ({
-  title,
-  project,
-  elapsed,
-  runningsince,
-  editFormOpen = false,
-}) => {
+const EditableTimer = ({ id, title, project, elapsed, runningsince }) => {
+  const [editFormOpen, setEditFormOpen] = useState(false);
+
+  const handleEditTimer = (e) => {
+    setEditFormOpen(true);
+  };
   if (editFormOpen) {
-    return <TimerForm title={title} project={project} />;
+    return <TimerForm id={id} title={title} project={project} />;
   } else {
     return (
       <Timer
+        id={id}
         title={title}
         project={project}
         elapsed={elapsed}
         runningsince={runningsince}
+        onEditTimer={handleEditTimer}
       />
     );
   }
@@ -70,7 +92,7 @@ const EditableTimer = ({
 
 const TimerForm = ({ title, project }) => {
   return (
-    <div className="card">
+    <div className="card border">
       <div className="content">
         <div className="form">
           <div className="field">
@@ -91,19 +113,19 @@ const TimerForm = ({ title, project }) => {
   );
 };
 
-const Timer = ({ title, project, elapsed, runningsince }) => {
+const Timer = ({ title, project, elapsed, runningsince, onEditTimer }) => {
   const elapsedTime = elapsed;
   return (
-    <div className="content card">
-      <div className="card">
-        <div className="header">{title}</div>
-        <div className="meta">{project}</div>
+    <div className="content card border">
+      <div className="timer">
+        <div className="header main">{title}</div>
+        <div className="header sub">{project}</div>
         <div className="center">
           <h3>{elapsedTime}</h3>
         </div>
         <div className="right floated">
           <span>
-            <i className="fa fa-edit"></i>
+            <i className="fa fa-edit" onClick={() => onEditTimer()}></i>
           </span>
           <span>
             <i className="fa fa-trash"></i>
@@ -111,7 +133,7 @@ const Timer = ({ title, project, elapsed, runningsince }) => {
         </div>
       </div>
       <div>
-        <button className="button blue">Start</button>
+        <button className="button blue start">Start</button>
       </div>
     </div>
   );
