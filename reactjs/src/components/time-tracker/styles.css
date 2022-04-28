@@ -6,7 +6,6 @@
   --red: crimson;
 }
 .card {
-  background-color: antiquewhite;
   margin: 4px 0;
   padding: 16px;
 }
@@ -15,6 +14,8 @@
   background-color: white;
   padding: 8px 16px;
   border: 1px solid;
+  margin: 2px;
+  cursor: pointer;
 }
 
 .blue {
@@ -27,6 +28,10 @@
   color: var(--red);
 }
 
+.start {
+  width: 100%;
+}
+
 input,
 label {
   display: block;
@@ -36,4 +41,27 @@ label {
 }
 input {
   padding: 8px;
+  border: 1px solid silver;
+}
+
+.border {
+  border: 1px solid silver;
+}
+
+.header.main {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.header.sub {
+  color: gray;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: left;
+}
+
+.fa {
+  margin: 4px;
+  cursor: pointer;
 }
