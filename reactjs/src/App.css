@@ -10,6 +10,13 @@
   justify-content: center;
   font-size: calc(10px + 1vmin);
   color: white;
+  padding: 4px;
+}
+
+.App-header h1 {
+  font-weight: 200;
+  text-transform: uppercase;
+  font-size: 20px;
 }
 
 .App-link {
@@ -17,15 +24,120 @@
 }
 
 .app-main {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
   background-color: silver;
 }
 
 .component-container {
-  max-width: 200px;
-  padding: 8px;
+  padding: 16px 32px;
   background-color: white;
   margin: 4px;
-  border-radius: 6px;
+  border-radius: 4px;
+
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* comment component styles */
+
+.comment-container {
+}
+
+.comment {
+  margin: 0 8px;
+  background-color: #efefef;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+}
+
+img {
+  border-radius: 50%;
+}
+
+.userInfo-name {
+  font-weight: 500;
+}
+
+/*  product item styles */
+
+.comment-date {
+  color: gray;
+  font-size: 12px;
+}
+.underline {
+  border-bottom: 1px solid silver;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.item {
+  display: flex;
+  margin: 32px 0;
+}
+
+.item a {
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0;
+}
+.item .image {
+  width: 120px;
+}
+
+.item p {
+  margin: 0;
+}
+
+.item .image img {
+  width: 100%;
+  border-radius: 0;
+}
+
+.item .content {
+  text-align: left;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item .content img {
+  width: 40px;
+  margin-left: 8px;
+}
+
+.item .content .extra {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.extra span {
+  color: gray;
+  font-size: 14px;
+}
+
+.fa-caret-up {
+  color: cornflowerblue;
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.content .header {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.item .description a {
+  color: cornflowerblue;
+}
+
+.item .button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button-vote:active {
+  color: red;
 }

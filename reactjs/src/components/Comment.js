@@ -1,11 +1,36 @@
 import React from "react";
 
+const comments = [
+  {
+    user: {
+      name: "Michael",
+      avatarurl: "./images/male.png",
+    },
+    text: "Michael's opinion...",
+    date: "2022/08/13",
+  },
+  {
+    user: {
+      name: "Lisa",
+      avatarurl: "./images/female.png",
+    },
+    text: "Lisa's opinion...",
+    date: "2022/09/26",
+  },
+];
+
 function Comment(props) {
   return (
-    <div className="comment">
-      <UserInfo user={{ name: "Michael", avatarurl: "./images/male.png" }} />
-      <div className="comment-text">{props.text}</div>
-      <div className="comment-date">{props.date}</div>
+    <div className="comment-container">
+      {comments.map((comment) => {
+        return (
+          <div className="comment">
+            <UserInfo user={comment.user} />
+            <div className="comment-text">{comment.text}</div>
+            <div className="comment-date">{comment.date}</div>
+          </div>
+        );
+      })}
     </div>
   );
 }
