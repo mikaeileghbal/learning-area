@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+
 const getJSON = (key) => key && JSON.parse(localStorage.getItem(key));
 
 const saveJSON = (key, data) => localStorage.setItem(key, JSON.stringify(data));
@@ -18,6 +19,15 @@ export default function GetData({ login }) {
       .catch((err) => {
         setError(err);
       });
+
+export default function GetData({ login }) {
+  const [user, setUser] = useState();
+
+  const getUser = () => {
+    fetch(`https://api.github.com/users/${login}`)
+      .then((response) => response.json())
+      .then(setUser);
+
     console.log("from then");
   };
 
@@ -44,6 +54,7 @@ export default function GetData({ login }) {
   };
 
   useEffect(() => {
+
     if (user.login == login) return;
 
     const { name, avatar_url, location } = user;
@@ -61,11 +72,11 @@ export default function GetData({ login }) {
     getUser();
   }, [login]);
 
+
   if (isLoading) {
     console.log("Loading.....");
     return <p>Loading ...</p>;
   }
-
   if (error) return <p>Error.</p>;
   if (!user) return <p>No user...</p>;
 
