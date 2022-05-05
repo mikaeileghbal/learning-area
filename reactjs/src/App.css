@@ -24,7 +24,8 @@
 }
 
 .app-main {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
   background-color: silver;
 }
 
