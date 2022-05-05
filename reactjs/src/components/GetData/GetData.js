@@ -1,5 +1,25 @@
 import React, { useEffect, useState } from "react";
 
+
+const getJSON = (key) => key && JSON.parse(localStorage.getItem(key));
+
+const saveJSON = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+
+export default function GetData({ login }) {
+  const [user, setUser] = useState(getJSON(`user:${login}`));
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getUser = () => {
+    setIsLoading(true);
+    fetch(`https://api.github.com/users/${login}`)
+      .then((response) => response.json())
+      .then(setUser)
+      .then(() => setIsLoading(false))
+      .catch((err) => {
+        setError(err);
+      });
+
 export default function GetData({ login }) {
   const [user, setUser] = useState();
 
@@ -7,6 +27,7 @@ export default function GetData({ login }) {
     fetch(`https://api.github.com/users/${login}`)
       .then((response) => response.json())
       .then(setUser);
+
     console.log("from then");
   };
 
@@ -33,10 +54,30 @@ export default function GetData({ login }) {
   };
 
   useEffect(() => {
+
+    if (user.login == login) return;
+
+    const { name, avatar_url, location } = user;
+    saveJSON(`user:${login}`, {
+      name,
+      login,
+      avatar_url,
+      location,
+    });
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
     if (!login) return;
     getUser();
   }, [login]);
 
+
+  if (isLoading) {
+    console.log("Loading.....");
+    return <p>Loading ...</p>;
+  }
+  if (error) return <p>Error.</p>;
   if (!user) return <p>No user...</p>;
 
   return (
