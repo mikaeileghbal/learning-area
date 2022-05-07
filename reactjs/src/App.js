@@ -2,7 +2,8 @@ import "./App.css";
 import Comment from "./components/Comment";
 import ProductList from "./components/up-vote/ProductList";
 import TimerDashboard from "./components/time-tracker/TimerDashboard";
-import GetData from "./components/GetData/GetData";
+import GetData from "./components/get-data/GetData";
+import BasicButtos from "./components/forms/BasicButtons";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
         <div className="component-container">
           <h2 className="underline">Incorporating Data</h2>
           <GetData login="mikaeieghbal" />
+        </div>
+        <div className="component-container">
+          <h2 className="underline">Basic Form</h2>
+          <BasicButtos />
         </div>
       </main>
     </div>
