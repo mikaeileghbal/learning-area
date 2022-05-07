@@ -36,8 +36,7 @@ function App() {
         </div>
         <div className="component-container">
           <h2 className="underline">Incorporating Data</h2>
-          <GetData login="mikaeieghbal" />
-
+          {/* <GetData login="mikaeieghbal" /> */}
         </div>
         <div className="component-container">
           <h2 className="underline">Render props</h2>
