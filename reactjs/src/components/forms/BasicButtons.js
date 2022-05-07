@@ -1,25 +1,27 @@
 import React from "react";
 
 export default function BasicButtos() {
-  const handleGreat = (e) => {
-    console.log("Great");
-  };
-
-  const handleAmazing = (e) => {
-    console.log("Amazing");
+  const handleButtonClick = (e) => {
+    const btn = e.target;
+    console.log(`The user clicked ${btn.name}: ${btn.value} `);
   };
 
   return (
     <div>
       <h3>What do you hink of React?</h3>
-      <button type="button" name="button-1" value="great" onClick={handleGreat}>
+      <button
+        type="button"
+        name="button-1"
+        value="great"
+        onClick={handleButtonClick}
+      >
         Great
       </button>
       <button
         type="button"
         name="button-2"
         value="amazing"
-        onClick={handleAmazing}
+        onClick={handleButtonClick}
       >
         Amazing
       </button>

@@ -6,6 +6,7 @@ import GetData from "./components/get-data/GetData";
 import BasicButtos from "./components/forms/BasicButtons";
 
 import RenderProps from "./components/RenderProps/RenderProps";
+import SignUp from "./components/forms/SignUp";
 
 function App() {
   return (
@@ -45,6 +46,10 @@ function App() {
         <div className="component-container">
           <h2 className="underline">Basic Form</h2>
           <BasicButtos />
+        </div>
+        <div className="component-container">
+          <h2 className="underline">Text Input</h2>
+          <SignUp />
         </div>
       </main>
     </div>
