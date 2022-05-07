@@ -5,6 +5,8 @@ import TimerDashboard from "./components/time-tracker/TimerDashboard";
 import GetData from "./components/get-data/GetData";
 import BasicButtos from "./components/forms/BasicButtons";
 
+import RenderProps from "./components/RenderProps/RenderProps";
+
 function App() {
   return (
     <div className="App">
@@ -35,6 +37,11 @@ function App() {
         <div className="component-container">
           <h2 className="underline">Incorporating Data</h2>
           <GetData login="mikaeieghbal" />
+
+        </div>
+        <div className="component-container">
+          <h2 className="underline">Render props</h2>
+          <RenderProps />
         </div>
         <div className="component-container">
           <h2 className="underline">Basic Form</h2>
