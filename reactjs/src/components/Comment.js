@@ -2,6 +2,7 @@ import React from "react";
 
 const comments = [
   {
+    id: 1,
     user: {
       name: "Michael",
       avatarurl: "./images/male.png",
@@ -10,6 +11,7 @@ const comments = [
     date: "2022/08/13",
   },
   {
+    id: 2,
     user: {
       name: "Lisa",
       avatarurl: "./images/female.png",
@@ -24,7 +26,7 @@ function Comment(props) {
     <div className="comment-container">
       {comments.map((comment) => {
         return (
-          <div className="comment">
+          <div className="comment" key={comment.id}>
             <UserInfo user={comment.user} />
             <div className="comment-text">{comment.text}</div>
             <div className="comment-date">{comment.date}</div>

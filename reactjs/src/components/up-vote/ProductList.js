@@ -53,7 +53,7 @@ const Product = (props) => {
             className="button button-vote"
             onClick={() => props.onVote(props.id)}
           >
-            <i class="fa fa-caret-up"></i>
+            <i className="fa fa-caret-up"></i>
           </button>
           {props.votes}
         </div>
