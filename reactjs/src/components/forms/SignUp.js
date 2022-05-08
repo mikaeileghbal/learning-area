@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CourseSelect from "./CourseSelect";
 import Field from "./Field";
 
 const initialState = [
@@ -10,8 +11,10 @@ const initialState = [
 export default function SignUp() {
   const [people, setPeople] = useState(initialState);
   const [state, setState] = useState({
-    fields: {},
+    fields: { name: "", email: "", course: "", department: "" },
     errors: {},
+    _loading: false,
+    _saveStatus: "READY",
   });
 
   const onInputChange = ({ name, value, error }) => {
@@ -53,15 +56,19 @@ export default function SignUp() {
           validate={(val) => (val ? false : "Email required")}
         />
 
+        <CourseSelect
+          department={state.fields.department}
+          course={state.fields.course}
+          onChange={onInputChange}
+        />
+
         <input type="submit" />
       </form>
       <div>
         <h3>Names</h3>
         <ul>
-          {people.map((person, i) => (
-            <li key={i}>
-              {person.name} - {person.email}
-            </li>
+          {people.map(({ name, email, department, course }, i) => (
+            <li key={i}>{[name, email, department, course].join("-")}</li>
           ))}
         </ul>
       </div>
