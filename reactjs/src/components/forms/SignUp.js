@@ -1,34 +1,35 @@
 import React, { useState } from "react";
+import Field from "./Field";
 
+const initialState = [
+  {
+    name: "mikaeil",
+    email: "mike@yahoo.com",
+  },
+];
 export default function SignUp() {
-  const [fields, setFields] = useState({});
-  const [people, setPeople] = useState([]);
-  const [fieldErrors, setFieldErrors] = useState({});
+  const [people, setPeople] = useState(initialState);
+  const [state, setState] = useState({
+    fields: {},
+    errors: {},
+  });
 
-  const onInputChange = (e) => {
-    const newFields = { ...fields };
-    newFields[e.target.name] = e.target.value;
-    setFields(newFields);
+  const onInputChange = ({ name, value, error }) => {
+    const fields = Object.assign({}, state.fields);
+    const errors = Object.assign({}, state.errors);
+
+    fields[name] = value;
+    errors[name] = error;
+
+    setState({ fields, errors });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const person = fields;
-    const fieldErrors = validate(person);
-    setFieldErrors(fieldErrors);
+    const newPeople = people.concat(state.fields);
 
-    if (Object.keys(fieldErrors).length) return;
-
-    const newPeople = [...people, person];
     setPeople(newPeople);
-    setFields({});
-  };
-
-  const validate = (person) => {
-    const error = {};
-    if (!person.name) error.name = "Name is required";
-    if (!person.email) error.email = "Email is required";
-    return error;
+    setState({ fields: { name: "", email: "" }, errors: {} });
   };
 
   return (
@@ -36,22 +37,22 @@ export default function SignUp() {
       <h2>Sign Up Sheet</h2>
 
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
+        <Field
           placeholder="Name"
-          value={fields.name}
+          name="name"
+          value={state.fields.name}
           onChange={onInputChange}
+          validate={(val) => (val ? false : "Name required")}
         />
-        <span style={{ color: "red" }}>{fieldErrors.name}</span>
-        <input
-          type="email"
-          name="email"
+
+        <Field
           placeholder="Email"
-          value={fields.email}
+          name="email"
+          value={state.fields.email}
           onChange={onInputChange}
+          validate={(val) => (val ? false : "Email required")}
         />
-        <span style={{ color: "red" }}>{fieldErrors.email}</span>
+
         <input type="submit" />
       </form>
       <div>
