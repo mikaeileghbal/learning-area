@@ -4,7 +4,7 @@ import ProductList from "./components/up-vote/ProductList";
 import TimerDashboard from "./components/time-tracker/TimerDashboard";
 import GetData from "./components/get-data/GetData";
 import BasicButtos from "./components/forms/BasicButtons";
-
+import GitHubUser from "./components/fetch/GitHubUser";
 import RenderProps from "./components/RenderProps/RenderProps";
 import SignUp from "./components/forms/SignUp";
 
@@ -50,6 +50,10 @@ function App() {
         <div className="component-container">
           <h2 className="underline">Text Input</h2>
           <SignUp />
+        </div>
+        <div className="component-container">
+          <h2 className="underline">Text Input</h2>
+          <GitHubUser login="mikaeileghbal" />
         </div>
       </main>
     </div>
