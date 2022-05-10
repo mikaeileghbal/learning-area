@@ -1,16 +1,26 @@
 import React from "react";
 import getData from "./data";
-import List from "./List";
+
+import { FixedSizeList } from "react-window";
 
 export default function Virtualize() {
   const bigData = getData();
-  const renderItem = (item) => (
-    <div style={{ display: "flex" }}>
-      <img src={item.avatar} alt={item.name} width={50} />
+  const renderItem = ({ index, style }) => (
+    <div style={{ ...style, display: "flex" }}>
+      <img src={bigData[index].avatar} alt={bigData[index].name} width={50} />
       <p>
-        {item.name} - {item.email}
+        {bigData[index].name} - {bigData[index].email}
       </p>
     </div>
   );
-  return <List data={bigData} renderItem={renderItem} />;
+  return (
+    <FixedSizeList
+      height={window.innerHeight}
+      width={window.innerWidth - 20}
+      itemCount={bigData.length}
+      itemSize={50}
+    >
+      {renderItem}
+    </FixedSizeList>
+  );
 }
