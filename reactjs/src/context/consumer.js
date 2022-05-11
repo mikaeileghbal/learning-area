@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { ColorContext } from "./main";
+import { useColors } from "./color-hooks";
 
-export default function Consumer() {
-  const { colors } = useContext(ColorContext);
+export default function Consumer({ onDelete }) {
+  const { colors } = useColors();
   return (
     <div>
       <p>Context Consumer</p>
@@ -10,6 +10,7 @@ export default function Consumer() {
         {colors.map((color, i) => (
           <li key={i}>
             {color.name} - {color.code}
+            <button onClick={onDelete}>Delete</button>
           </li>
         ))}
       </ul>
