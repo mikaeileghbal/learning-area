@@ -13,6 +13,7 @@ export default function UserRepository({
       renderSuccess={({ data }) => (
         <RepoMenmu
           repository={data}
+          login={login}
           selectedRepo={selectedRepo}
           onSelect={onSelect}
         />
