@@ -141,3 +141,10 @@ img {
 .button-vote:active {
   color: red;
 }
+
+.big-data-item {
+  padding: 1rem;
+  border: 1px solid silver;
+  display: flex;
+  flex-direction: column;
+}

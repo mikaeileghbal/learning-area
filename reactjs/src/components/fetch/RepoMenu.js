@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useIterator } from "../custom-hooks/useIterator";
+import RepositoryReadme from "./RepositoryReadme";
 
-export default function RepoMenmu({ repository, onSelect = (f) => f }) {
+export default function RepoMenmu({ repository, login, onSelect = (f) => f }) {
   const [{ name }, previous, next] = useIterator(repository);
 
   useEffect(() => {
@@ -10,10 +11,13 @@ export default function RepoMenmu({ repository, onSelect = (f) => f }) {
   }, [name]);
 
   return (
-    <div style={{ display: "flex" }}>
-      <button onClick={previous}>&lt;</button>
-      <p>{name}</p>
-      <button onClick={next}>&gt;</button>
-    </div>
+    <>
+      <div style={{ display: "flex" }}>
+        <button onClick={previous}>&lt;</button>
+        <p>{name}</p>
+        <button onClick={next}>&gt;</button>
+      </div>
+      <RepositoryReadme login={login} repo={name} />
+    </>
   );
 }

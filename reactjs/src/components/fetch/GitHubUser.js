@@ -1,6 +1,7 @@
 import React from "react";
 import Fetch from "./Fetch";
 import UserRepository from "./UserRepository";
+import "../../App.css";
 
 export default function GitHubUser({ login }) {
   return (
