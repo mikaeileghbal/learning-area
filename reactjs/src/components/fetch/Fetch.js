@@ -7,11 +7,9 @@ export default function Fetch({
   loadingFallback = <p>Loading ...</p>,
   renderError = (error) => <pre>{JSON.stringify(error, null, 2)}</pre>,
 }) {
-  console.log("inside Fetch comp", uri);
-
+  console.log("Fetch uri", uri);
   const { loading, data, error } = useFetch(uri);
 
-  console.log(loading, data, error);
   if (loading) return loadingFallback;
   if (error) return renderError(error);
   if (data) return renderSuccess({ data });
