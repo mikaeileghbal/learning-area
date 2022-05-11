@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import Virtualize from "./components/virtualized-list/Virtualize";
+import Main from "./context/main";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,3 +14,6 @@ root.render(
 
 const root2 = ReactDOM.createRoot(document.getElementById("bigData"));
 root2.render(<Virtualize />);
+
+const contextRoot = ReactDOM.createRoot(document.getElementById("context"));
+contextRoot.render(<Main />);
