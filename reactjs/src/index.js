@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import Virtualize from "./components/virtualized-list/Virtualize";
 import Main from "./context/main";
+import Query from "./graphql/query";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
