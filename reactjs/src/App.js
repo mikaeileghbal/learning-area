@@ -7,6 +7,7 @@ import BasicButtos from "./components/forms/BasicButtons";
 import GitHubUser from "./components/fetch/GitHubUser";
 import RenderProps from "./components/RenderProps/RenderProps";
 import SignUp from "./components/forms/SignUp";
+import Query from "./graphql/query";
 
 function App() {
   return (
@@ -54,6 +55,10 @@ function App() {
         <div className="component-container">
           <h2 className="underline">Text Input</h2>
           <GitHubUser login="mikaeileghbal" />
+        </div>
+        <div className="component-container">
+          <h2 className="underline">GraphQL</h2>
+          <Query />
         </div>
       </main>
     </div>
