@@ -1,5 +1,6 @@
 import React from "react";
 import { useFetch } from "../custom-hooks/useFetch";
+import PropTypes from "prop-types";
 
 export default function Fetch({
   uri,
@@ -14,3 +15,7 @@ export default function Fetch({
   if (error) return renderError(error);
   if (data) return renderSuccess({ data });
 }
+
+Fetch.PropTypes = {
+  uri: PropTypes.string.isRequired,
+};

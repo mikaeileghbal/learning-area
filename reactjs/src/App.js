@@ -70,3 +70,5 @@ function Welcome(props) {
 }
 
 export default App;
+
+export function timesTwo() {}
