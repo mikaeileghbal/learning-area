@@ -4,13 +4,7 @@ import UserRepository from "./UserRepository";
 import "../../App.css";
 
 export default function GitHubUser({ login }) {
-  return (
-    <Fetch
-      uri={`https://api.github.com/users/${login}`}
-      renderSuccess={UserDetails}
-      loadingFallback={<Spinner />}
-    />
-  );
+  return <Fetch renderSuccess={UserDetails} loadingFallback={<Spinner />} />;
 }
 
 function UserDetails({ data }) {
