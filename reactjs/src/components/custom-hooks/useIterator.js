@@ -16,3 +16,8 @@ export const useIterator = (items = [], initialIndex = 0) => {
   const item = useMemo(() => items[i], [i]);
   return [item || items[0], prev, next];
 };
+
+export function gnar() {
+  const [nickame, setNickname] = useState("dude");
+  return <h1>gnarly</h1>;
+}
