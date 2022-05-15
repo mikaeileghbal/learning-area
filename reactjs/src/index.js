@@ -18,3 +18,6 @@ root2.render(<Virtualize />);
 
 const contextRoot = ReactDOM.createRoot(document.getElementById("context"));
 contextRoot.render(<Main />);
+
+let html = ReactDOM.renderToString(<Main />);
+console.log(html);

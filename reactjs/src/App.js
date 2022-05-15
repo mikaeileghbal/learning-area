@@ -66,6 +66,7 @@ function App() {
 }
 
 function Welcome(props) {
+  // eslint-disable-next-line react/prop-types
   return <h2>Hello, {props.name} </h2>;
 }
 
