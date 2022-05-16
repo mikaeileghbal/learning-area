@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -23,11 +24,13 @@ const createStore = function (reducer, initialState) {
 
   const dispatch = (action) => {
     state = reducer(state, action);
+    listeners.forEach((l) => l());
   };
 
   return {
     getState,
     dispatch,
+    subscribe,
   };
 };
 
@@ -46,39 +49,88 @@ const reducer = function (state, action) {
 
 const store = createStore(reducer, initialState);
 
-const addMessage = {
-  type: actionType.ADD_MESSAGE,
-  message: "New message",
-};
-store.dispatch(addMessage);
-console.log(store.getState());
+// const listener = () => {
+//   console.log("Current State:", store.getState());
+// };
 
-const removeMessage = {
-  type: actionType.REMOVE_MESSAGE,
-  index: 3,
-};
-store.dispatch(removeMessage);
-console.log(store.getState());
+// store.subscribe(listener);
+
+// const addMessage = {
+//   type: actionType.ADD_MESSAGE,
+//   message: "New message",
+// };
+// store.dispatch(addMessage);
+// console.log(store.getState());
+
+// const removeMessage = {
+//   type: actionType.REMOVE_MESSAGE,
+//   index: 3,
+// };
+// store.dispatch(removeMessage);
+// console.log(store.getState());
 
 function App() {
+  const [, updateState] = useState();
+
+  store.subscribe(() => {
+    updateState({});
+  });
+
+  const messages = store.getState().messages;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <MessageView messages={messages} />
+      <MessageInput />
     </div>
   );
 }
 
+function MessageView({ messages }) {
+  const onRemoveMessage = (i) => {
+    const removeMessage = {
+      type: actionType.REMOVE_MESSAGE,
+      index: i,
+    };
+    store.dispatch(removeMessage);
+  };
+  return (
+    <div>
+      {messages.map((message, i) => (
+        <p key={i} onClick={() => onRemoveMessage(i)}>
+          {message}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+// const fileds = {
+//   message: "test",
+// };
+
+function MessageInput() {
+  const [fileds, setFields] = useState({ message: "" });
+  const onChange = (e) => {
+    setFields({
+      message: e.target.value,
+    });
+  };
+
+  const onClick = (e) => {
+    store.dispatch({
+      type: actionType.ADD_MESSAGE,
+      message: fileds.message,
+    });
+    setFields({ message: "" });
+  };
+  return (
+    <div>
+      <input value={fileds.message} type="text" onChange={onChange} />
+      <button type="button" onClick={onClick}>
+        Add Message
+      </button>
+    </div>
+  );
+}
 export default App;
