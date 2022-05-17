@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+.comment {
+  padding: 1rem;
+  color: #282c34;
+  background-color: rgb(235, 227, 227);
+  box-shadow: 0 8px 15px -10px rgba(0, 0, 0, 0.2);
+  margin: 1rem;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.max-width {
+  max-width: 500px;
+  margin: 1rem auto;
+}
+
+.comment span {
+  margin-left: 1rem;
+  color: #282c34;
+  font-size: 0.8rem;
+}
+
+.input_container {
+  padding: 1rem 0;
+  text-align: right;
+}
+
+input,
+button {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+input {
+  margin-bottom: 0.5rem;
+  border: 1px solid silver;
+  margin-right: 0.5rem;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: #282c34;
+  color: white;
+  cursor: pointer;
+}
