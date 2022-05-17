@@ -37,6 +37,8 @@
   }
 }
 
+.thread {
+}
 .comment {
   padding: 1rem;
   color: #282c34;
@@ -55,6 +57,25 @@
   margin: 1rem auto;
 }
 
+.tabs {
+  display: flex;
+  margin-bottom: 0;
+}
+
+.item {
+  padding: 1rem;
+  border: 1px solid silver;
+}
+
+.item.active {
+  background-color: antiquewhite;
+}
+
+.thread {
+  border: 1px solid silver;
+  padding: 1rem;
+  margin-top: 0;
+}
 .comment span {
   margin-left: 1rem;
   color: #282c34;
