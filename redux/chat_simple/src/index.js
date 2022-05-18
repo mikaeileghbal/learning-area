@@ -5,11 +5,12 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ThreadsApp from "./threads";
 import ThreadsAppBreakup from "./threads-breakup";
+import WrappedApp from "./threads-react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThreadsAppBreakup />
+    <WrappedApp />
   </React.StrictMode>
 );
 
