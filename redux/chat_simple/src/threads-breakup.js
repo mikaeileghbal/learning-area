@@ -26,41 +26,49 @@ const initialState = {
   ],
 };
 
-console.log("initial:", initialState);
-
 const actionType = {
   ADD_MESSAGE: "ADD_MESSAGE",
   REMOVE_MESSAGE: "REMOVE_MESSAGE",
   OPEN_THREAD: "OPEN_THREAD",
 };
 
-const reducer = function (state, action) {
+const reducer = function (state = initialState, action) {
   return {
     activeThreadId: activeThreadIdReducer(state.activeThreadId, action),
     threads: threadsReducer(state.threads, action),
   };
 };
 
-const activeThreadIdReducer = function (state, action) {
+const activeThreadIdReducer = function (state = "1", action) {
   if (action.type === actionType.OPEN_THREAD) {
     return action.id;
   } else {
     return state;
   }
 };
-const threadsReducer = function (state, action) {
+
+const findThreadIndex = function (threads, action) {
   switch (action.type) {
     case actionType.ADD_MESSAGE:
-      const newMessage = {
-        text: action.text,
-        timestamp: Date.now(),
-        id: v4(),
-      };
-      const threadIndex = state.findIndex((t) => t.id === action.threadId);
+      return threads.findIndex((t) => t.id === action.threadId);
+    case actionType.REMOVE_MESSAGE:
+      return threads.findIndex((t) =>
+        t.messages.find((m) => m.id === action.id)
+      );
+    default:
+      return threads;
+  }
+};
+
+const threadsReducer = function (state = [], action) {
+  switch (action.type) {
+    case actionType.ADD_MESSAGE:
+    case actionType.REMOVE_MESSAGE: {
+      const threadIndex = findThreadIndex(state, action);
       const oldThread = state[threadIndex];
       const newThread = {
         ...oldThread,
-        messages: oldThread.messages.concat(newMessage),
+        messages: messagesReducer(oldThread.messages, action),
       };
 
       return [
@@ -68,29 +76,32 @@ const threadsReducer = function (state, action) {
         newThread,
         ...state.slice(threadIndex + 1, state.length),
       ];
-
-    case actionType.REMOVE_MESSAGE:
-      const threadIndexRemove = state.findIndex((t) =>
-        t.messages.find((m) => m.id === action.id)
-      );
-      const oldThreadRemove = state[threadIndexRemove];
-      const newThreadRemove = {
-        ...oldThreadRemove,
-        messages: oldThreadRemove.messages.filter((m) => m.id !== action.id),
-      };
-
-      return [
-        ...state.slice(0, threadIndexRemove),
-        newThreadRemove,
-        ...state.slice(threadIndexRemove + 1, state.length),
-      ];
+    }
 
     default:
       return state;
   }
 };
 
-const store = createStore(reducer, initialState);
+const messagesReducer = function (state = [], action) {
+  switch (action.type) {
+    case actionType.ADD_MESSAGE:
+      const newMessage = {
+        text: action.text,
+        timestamp: Date.now(),
+        id: v4(),
+      };
+      return state.concat(newMessage);
+
+    case actionType.REMOVE_MESSAGE:
+      return state.filter((m) => m.id !== action.id);
+
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
 
 export default function ThreadsAppBreakup() {
   const [, updateState] = useState();

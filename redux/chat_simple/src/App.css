@@ -63,18 +63,32 @@
 }
 
 .item {
-  padding: 1rem;
+  background-color: white;
+  position: relative;
+  padding: 0.5rem 1rem 1rem;
   border: 1px solid silver;
+  cursor: pointer;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  transition: all 0.2s;
+  z-index: 0;
+  margin-left: 0.12rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0.25rem);
 }
 
 .item.active {
   background-color: antiquewhite;
+  transform: translateY(0.1rem);
 }
 
 .thread {
-  border: 1px solid silver;
+  position: relative;
+  background-color: white;
+
   padding: 1rem;
   margin-top: 0;
+  z-index: 2;
 }
 .comment span {
   margin-left: 1rem;
