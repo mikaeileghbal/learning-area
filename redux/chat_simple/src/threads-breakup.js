@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 import logo from "./logo.svg";
 import "./App.css";
 
-const initialState = {
-  activeThreadId: 1,
-  threads: [
-    {
-      id: 1,
-      title: "Buz Aldrin",
-      messages: [
-        { text: "Message 1", timestamp: 1252554055650, id: 1 },
-        { text: "Message 2", timestamp: 1461252541045, id: 2 },
-      ],
-    },
-    {
-      id: 2,
-      title: "Michael Collins",
-      messages: [
-        { text: "Message 3", timestamp: 1352554055650, id: 1 },
-        { text: "Message 4", timestamp: 1561252541045, id: 2 },
-      ],
-    },
-  ],
-};
+const initialState = [
+  {
+    id: 1,
+    title: "Buz Aldrin",
+    messages: [
+      { text: "Message 1", timestamp: 1252554055650, id: 1 },
+      { text: "Message 2", timestamp: 1461252541045, id: 2 },
+    ],
+  },
+  {
+    id: 2,
+    title: "Michael Collins",
+    messages: [
+      { text: "Message 3", timestamp: 1352554055650, id: 1 },
+      { text: "Message 4", timestamp: 1561252541045, id: 2 },
+    ],
+  },
+];
 
 const actionType = {
   ADD_MESSAGE: "ADD_MESSAGE",
@@ -32,14 +29,7 @@ const actionType = {
   OPEN_THREAD: "OPEN_THREAD",
 };
 
-const reducer = function (state = initialState, action) {
-  return {
-    activeThreadId: activeThreadIdReducer(state.activeThreadId, action),
-    threads: threadsReducer(state.threads, action),
-  };
-};
-
-const activeThreadIdReducer = function (state = "1", action) {
+const activeThreadIdReducer = function (state = 1, action) {
   if (action.type === actionType.OPEN_THREAD) {
     return action.id;
   } else {
@@ -60,7 +50,7 @@ const findThreadIndex = function (threads, action) {
   }
 };
 
-const threadsReducer = function (state = [], action) {
+const threadsReducer = function (state = initialState, action) {
   switch (action.type) {
     case actionType.ADD_MESSAGE:
     case actionType.REMOVE_MESSAGE: {
@@ -100,6 +90,11 @@ const messagesReducer = function (state = [], action) {
       return state;
   }
 };
+
+const reducer = combineReducers({
+  activeThreadId: activeThreadIdReducer,
+  threads: threadsReducer,
+});
 
 const store = createStore(reducer);
 
