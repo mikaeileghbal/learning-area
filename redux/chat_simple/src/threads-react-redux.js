@@ -99,6 +99,28 @@ const reducer = combineReducers({
 
 const store = createStore(reducer);
 
+// Action creators
+function removeMessage(id) {
+  return {
+    type: actionType.REMOVE_MESSAGE,
+    id: id,
+  };
+}
+
+function addMessage(text, threadId) {
+  return {
+    type: actionType.ADD_MESSAGE,
+    threadId: threadId,
+  };
+}
+
+function openThread(id) {
+  return {
+    type: actionType.OPEN_THREAD,
+    id: id,
+  };
+}
+
 function ThreadsAppReactRedux() {
   const [, updateState] = useState();
 
@@ -128,11 +150,7 @@ const mapStateToTabsProps = (state) => {
 
 // Map displatch to props
 const mapDispatchToTabsProps = (dispatch) => ({
-  onClick: (id) =>
-    dispatch({
-      type: actionType.OPEN_THREAD,
-      id: id,
-    }),
+  onClick: (id) => dispatch(openThread(id)),
 });
 
 // Presentaional Component
@@ -185,10 +203,7 @@ const mapStateToThreadProps = (state) => ({
 // Map dispatch to props
 const mapDisplatchToThreadProps = (dispatch) => ({
   onRemoveMessage: (id) => {
-    dispatch({
-      type: actionType.REMOVE_MESSAGE,
-      id: id,
-    });
+    dispatch(removeMessage(id));
   },
   dispatch: dispatch,
 });
@@ -198,53 +213,8 @@ const mergeThreadProps = (stateProps, dispatchProps) => ({
   ...stateProps,
   ...dispatchProps,
   onMessageSubmit: (text) =>
-    dispatchProps.dispatch({
-      type: actionType.ADD_MESSAGE,
-      text: text,
-      threadId: stateProps.thread.id,
-    }),
+    dispatchProps.dispatch(addMessage(text, stateProps.thread.id)),
 });
-
-const ThreadDisplay = connect(
-  mapStateToThreadProps,
-  mapDisplatchToThreadProps,
-  mergeThreadProps
-)(Thread);
-
-// Container Component
-// function ThreadDisplay() {
-//   const [, updateState] = useState();
-//   store.subscribe(() => updateState());
-
-//   const state = store.getState();
-//   const threads = state.threads;
-//   const activeThreadId = state.activeThreadId;
-//   const activeThread = threads.find((t) => t.id === activeThreadId);
-
-//   const onRemoveMessage = (i) => {
-//     const removeMessage = {
-//       type: actionType.REMOVE_MESSAGE,
-//       id: i,
-//     };
-//     store.dispatch(removeMessage);
-//   };
-
-//   const onSubmit = (text) => {
-//     store.dispatch({
-//       type: actionType.ADD_MESSAGE,
-//       text: text,
-//       threadId: state.activeThreadId,
-//     });
-//   };
-
-//   return (
-//     <Thread
-//       thread={activeThread}
-//       onRemoveMessage={onRemoveMessage}
-//       onSubmit={onSubmit}
-//     />
-//   );
-// }
 
 // Presentational Component Composite
 function Thread({ thread, onRemoveMessage, onMessageSubmit }) {
@@ -300,6 +270,47 @@ function MessageInput({ onSubmit }) {
     </div>
   );
 }
+
+// Container Component
+// function ThreadDisplay() {
+//   const [, updateState] = useState();
+//   store.subscribe(() => updateState());
+
+//   const state = store.getState();
+//   const threads = state.threads;
+//   const activeThreadId = state.activeThreadId;
+//   const activeThread = threads.find((t) => t.id === activeThreadId);
+
+//   const onRemoveMessage = (i) => {
+//     const removeMessage = {
+//       type: actionType.REMOVE_MESSAGE,
+//       id: i,
+//     };
+//     store.dispatch(removeMessage);
+//   };
+
+//   const onSubmit = (text) => {
+//     store.dispatch({
+//       type: actionType.ADD_MESSAGE,
+//       text: text,
+//       threadId: state.activeThreadId,
+//     });
+//   };
+
+//   return (
+//     <Thread
+//       thread={activeThread}
+//       onRemoveMessage={onRemoveMessage}
+//       onSubmit={onSubmit}
+//     />
+//   );
+// }
+
+const ThreadDisplay = connect(
+  mapStateToThreadProps,
+  mapDisplatchToThreadProps,
+  mergeThreadProps
+)(Thread);
 
 const WrappedApp = function () {
   return (
