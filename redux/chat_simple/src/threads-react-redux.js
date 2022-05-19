@@ -109,7 +109,7 @@ function ThreadsAppReactRedux() {
   return (
     <div>
       <ThreadTab />
-      <Thread />
+      <ThreadDisplay />
     </div>
   );
 }
@@ -184,57 +184,102 @@ const mapStateToThreadProps = (state) => ({
 
 // Map dispatch to props
 const mapDisplatchToThreadProps = (dispatch) => ({
-  onMessageClick: (id) => {
+  onRemoveMessage: (id) => {
     dispatch({
       type: actionType.REMOVE_MESSAGE,
       id: id,
     });
   },
+  dispatch: dispatch,
 });
 
-function Thread() {
-  const state = store.getState();
-  const threads = state.threads;
-  const activeThreadId = state.activeThreadId;
-  const activeThread = threads.find((t) => t.id === activeThreadId);
+// Merge props
+const mergeThreadProps = (stateProps, dispatchProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  onMessageSubmit: (text) =>
+    dispatchProps.dispatch({
+      type: actionType.ADD_MESSAGE,
+      text: text,
+      threadId: stateProps.thread.id,
+    }),
+});
 
-  const onRemoveMessage = (i) => {
-    const removeMessage = {
-      type: actionType.REMOVE_MESSAGE,
-      id: i,
-    };
-    store.dispatch(removeMessage);
-  };
+const ThreadDisplay = connect(
+  mapStateToThreadProps,
+  mapDisplatchToThreadProps,
+  mergeThreadProps
+)(Thread);
 
+// Container Component
+// function ThreadDisplay() {
+//   const [, updateState] = useState();
+//   store.subscribe(() => updateState());
+
+//   const state = store.getState();
+//   const threads = state.threads;
+//   const activeThreadId = state.activeThreadId;
+//   const activeThread = threads.find((t) => t.id === activeThreadId);
+
+//   const onRemoveMessage = (i) => {
+//     const removeMessage = {
+//       type: actionType.REMOVE_MESSAGE,
+//       id: i,
+//     };
+//     store.dispatch(removeMessage);
+//   };
+
+//   const onSubmit = (text) => {
+//     store.dispatch({
+//       type: actionType.ADD_MESSAGE,
+//       text: text,
+//       threadId: state.activeThreadId,
+//     });
+//   };
+
+//   return (
+//     <Thread
+//       thread={activeThread}
+//       onRemoveMessage={onRemoveMessage}
+//       onSubmit={onSubmit}
+//     />
+//   );
+// }
+
+// Presentational Component Composite
+function Thread({ thread, onRemoveMessage, onMessageSubmit }) {
   return (
     <div className="thread max-width">
-      <div>
-        {activeThread.messages.map((message, i) => (
-          <p
-            className="comment max-width"
-            key={message.id}
-            onClick={() => onRemoveMessage(message.id)}
-          >
-            {message.text}
-            <span>
-              @{new Date(parseInt(message.timestamp)).toLocaleDateString()}
-            </span>
-          </p>
-        ))}
-      </div>
-      <div>
-        <MessageInput threadId={activeThread.id} />
-      </div>
+      <MessageList thread={thread} onRemoveMessage={onRemoveMessage} />
+      <MessageInput onSubmit={onMessageSubmit} />
     </div>
   );
 }
 
-// const fileds = {
-//   message: "test",
-// };
+// Presentational Component
+function MessageList({ thread, onRemoveMessage }) {
+  return (
+    <div>
+      {thread.messages.map((message, i) => (
+        <p
+          className="comment max-width"
+          key={message.id}
+          onClick={() => onRemoveMessage(message.id)}
+        >
+          {message.text}
+          <span>
+            @{new Date(parseInt(message.timestamp)).toLocaleDateString()}
+          </span>
+        </p>
+      ))}
+    </div>
+  );
+}
 
-function MessageInput({ threadId }) {
-  const [fileds, setFields] = useState({ message: "" });
+// Presentational Component
+function MessageInput({ onSubmit }) {
+  const [fields, setFields] = useState({ message: "" });
+
   const onChange = (e) => {
     setFields({
       message: e.target.value,
@@ -242,17 +287,13 @@ function MessageInput({ threadId }) {
   };
 
   const onClick = (e) => {
-    store.dispatch({
-      type: actionType.ADD_MESSAGE,
-      text: fileds.message,
-      threadId,
-    });
+    onSubmit(fields.message);
     setFields({ message: "" });
   };
 
   return (
     <div className="input_container max-width">
-      <input value={fileds.message} type="text" onChange={onChange} />
+      <input value={fields.message} type="text" onChange={onChange} />
       <button type="button" onClick={onClick}>
         Add Message
       </button>
