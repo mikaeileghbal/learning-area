@@ -106,19 +106,15 @@ function ThreadsAppReactRedux() {
     updateState({});
   });
 
-  const state = store.getState();
-  const threads = state.threads;
-  const activeThreadId = state.activeThreadId;
-  const activeThread = threads.find((t) => t.id === activeThreadId);
-
   return (
     <div>
       <ThreadTab />
-      <Thread thread={activeThread} />
+      <Thread />
     </div>
   );
 }
 
+// Map State to props
 const mapStateToTabsProps = (state) => {
   const tabs = state.threads.map((t) => ({
     title: t.title,
@@ -130,6 +126,7 @@ const mapStateToTabsProps = (state) => {
   };
 };
 
+// Map displatch to props
 const mapDispatchToTabsProps = (dispatch) => ({
   onClick: (id) =>
     dispatch({
@@ -180,7 +177,27 @@ const ThreadTab = connect(mapStateToTabsProps, mapDispatchToTabsProps)(Tab);
 //   return <Tab tabs={tabs} onClick={onClick} />;
 // }
 
-function Thread({ thread }) {
+// Map state to props
+const mapStateToThreadProps = (state) => ({
+  thread: state.threads.find((t) => t.id === state.activeThreadId),
+});
+
+// Map dispatch to props
+const mapDisplatchToThreadProps = (dispatch) => ({
+  onMessageClick: (id) => {
+    dispatch({
+      type: actionType.REMOVE_MESSAGE,
+      id: id,
+    });
+  },
+});
+
+function Thread() {
+  const state = store.getState();
+  const threads = state.threads;
+  const activeThreadId = state.activeThreadId;
+  const activeThread = threads.find((t) => t.id === activeThreadId);
+
   const onRemoveMessage = (i) => {
     const removeMessage = {
       type: actionType.REMOVE_MESSAGE,
@@ -192,7 +209,7 @@ function Thread({ thread }) {
   return (
     <div className="thread max-width">
       <div>
-        {thread.messages.map((message, i) => (
+        {activeThread.messages.map((message, i) => (
           <p
             className="comment max-width"
             key={message.id}
@@ -206,7 +223,7 @@ function Thread({ thread }) {
         ))}
       </div>
       <div>
-        <MessageInput threadId={thread.id} />
+        <MessageInput threadId={activeThread.id} />
       </div>
     </div>
   );
