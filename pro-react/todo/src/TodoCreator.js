@@ -19,7 +19,10 @@ export default function TodoCreator({ createNewItem }) {
         value={newItemText}
         onChange={onInputChange}
       ></input>
-      <button className="btn btn-primary mt-1" onClick={createNewItem}>
+      <button
+        className="btn btn-primary mt-1"
+        onClick={() => createNewItem(newItemText)}
+      >
         Add
       </button>
     </div>
