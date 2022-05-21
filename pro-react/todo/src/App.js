@@ -14,14 +14,18 @@ const initialTodo = [
 ];
 
 function App() {
+  const todos = localStorage.getItem("todos");
   const [username, sertUsername] = useState("Adam");
-  const [todoIems, setTodoItems] = useState(initialTodo);
+  const [todoIems, setTodoItems] = useState(
+    todos ? JSON.parse(todos) : initialTodo
+  );
   const [showCompleted, setShowCompleted] = useState(true);
 
   const createNewItem = (newItem) => {
     if (!todoIems.find((item) => item.action === newItem)) {
       const newItems = [...todoIems, { action: newItem, done: false }];
       setTodoItems(newItems);
+      localStorage.setItem("todos", JSON.stringify(newItems));
     }
   };
 
