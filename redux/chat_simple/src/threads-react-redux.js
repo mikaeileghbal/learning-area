@@ -110,6 +110,7 @@ function removeMessage(id) {
 function addMessage(text, threadId) {
   return {
     type: actionType.ADD_MESSAGE,
+    text: text,
     threadId: threadId,
   };
 }
