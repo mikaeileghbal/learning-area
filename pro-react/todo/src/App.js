@@ -1,6 +1,10 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
+import Banner from "./Banner";
+import TodoRow from "./TodoRow";
+import TodoCreator from "./TodoCreator";
+import VisibilityControl from "./VisibilityControl";
 
 const initialTodo = [
   { action: "Buy Flowers", done: false },
@@ -12,18 +16,11 @@ const initialTodo = [
 function App() {
   const [username, sertUsername] = useState("Adam");
   const [todoIems, setTodoItems] = useState(initialTodo);
-  const [newItemText, setNewItemText] = useState("");
+  const [showCompleted, setShowCompleted] = useState(true);
 
-  const changeUser = () => {
-    sertUsername(username === "Adam" ? "Bob" : "Adam");
-  };
-
-  const onInputChange = (e) => {
-    setNewItemText(e.target.value);
-  };
-  const createNewItem = () => {
-    if (!todoIems.find((item) => item.action === newItemText)) {
-      const newItems = [...todoIems, { action: newItemText, done: false }];
+  const createNewItem = (newItem) => {
+    if (!todoIems.find((item) => item.action === newItem)) {
+      const newItems = [...todoIems, { action: newItem, done: false }];
       setTodoItems(newItems);
     }
   };
@@ -35,49 +32,50 @@ function App() {
     setTodoItems(newItems);
   };
 
-  const todoTableRows = () =>
-    todoIems.map((item) => (
-      <tr key={item.action}>
-        <td>{item.action}</td>
-        <td>
-          <input
-            type="checkbox"
-            checked={item.done}
-            onChange={() => toggleTodo(item)}
-          ></input>
-        </td>
-      </tr>
-    ));
+  const onCompletedChange = (checked) => {
+    setShowCompleted(checked);
+  };
+
+  const todoTableRows = (done) =>
+    todoIems
+      .filter((item) => item.done === done)
+      .map((item) => (
+        <TodoRow key={item.action} item={item} toggleTodo={toggleTodo} />
+      ));
 
   return (
     <div>
-      <h4 className="bg-primary text-white text-center p-2">
-        {username}'s To Do List ({todoIems.filter((item) => !item.done).length}{" "}
-        items to do)
-      </h4>
-      <button className="btn btn-primary m-2" onClick={changeUser}>
-        Change
-      </button>
+      <Banner username={username} todoIems={todoIems} />
+
       <div className="container-fluid">
-        <div className="my-1">
-          <input
-            className="form-control"
-            value={newItemText}
-            onChange={onInputChange}
-          ></input>
-          <button className="btn btn-primary mt-1" onClick={createNewItem}>
-            Add
-          </button>
-        </div>
-        <table className="table table-triped table-bordered">
+        <TodoCreator createNewItem={createNewItem} />
+        <table className="table table-striped table-bordered">
           <thead>
             <tr>
               <th>Description</th>
               <th>Done</th>
             </tr>
           </thead>
-          <tbody>{todoTableRows()}</tbody>
+          <tbody>{todoTableRows(false)}</tbody>
         </table>
+        <div className="bg-secondary text-white text-center p-2">
+          <VisibilityControl
+            description="Completed Tasks"
+            isChecked={showCompleted}
+            onChange={onCompletedChange}
+          />
+        </div>
+        {showCompleted && (
+          <table className="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Done</th>
+              </tr>
+            </thead>
+            <tbody>{todoTableRows(true)}</tbody>
+          </table>
+        )}
       </div>
     </div>
   );
