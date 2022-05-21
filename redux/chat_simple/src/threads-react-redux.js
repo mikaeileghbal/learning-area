@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { v4 } from "uuid";
 import { combineReducers, createStore } from "redux";
 import { Provider, connect } from "react-redux";
-import logo from "./logo.svg";
 import "./App.css";
 
 const initialState = [
