@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadData } from "../data/ActionCreators";
@@ -30,10 +30,8 @@ function ShopConnectorPresent({ categories, products, loadData }) {
 
   console.log("category param: ", category);
 
-  useEffect(() => {
-    loadData(DataTypes.CATEGORIES);
-    loadData(DataTypes.PRODUCTS);
-  }, [categories, products, loadData, category]);
+  loadData(DataTypes.CATEGORIES);
+  loadData(DataTypes.PRODUCTS);
 
   return (
     <Routes>
@@ -46,7 +44,7 @@ function ShopConnectorPresent({ categories, products, loadData }) {
         element={
           <Shop
             categories={categories}
-            products={filterProducts(products, category)}
+            products={filterProducts(products, useParams().category)}
           />
         }
       />
