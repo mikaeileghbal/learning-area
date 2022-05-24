@@ -12,10 +12,7 @@ export default function Shop({ categories, products }) {
       </div>
       <div className="row">
         <div className="col-3 p-2">
-          <CategoryNavigation
-            baseUrl="/shop/products"
-            categories={categories}
-          />
+          <CategoryNavigation categories={categories} baseUrl="/products" />
         </div>
         <div className="col-9 p-2">
           <ProductList products={products} />

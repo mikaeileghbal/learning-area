@@ -1,6 +1,6 @@
 export const DataTypes = {
-  CATEGORIES: "Categries",
-  PRODUCTS: "Products",
+  CATEGORIES: "categories",
+  PRODUCTS: "products",
 };
 
 export const ActionTypes = {

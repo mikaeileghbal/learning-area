@@ -8,7 +8,7 @@ export default function ProductList({ products }) {
       <div className="card m-1 p-1 bg-light" key={product.id}>
         <h4>
           {product.name}
-          <span className="badge badge-pill badge-primary float-right">
+          <span class="badge badge-pill badge-secondary bg-primary">
             ${product.price.toFixed(2)}
           </span>
         </h4>
