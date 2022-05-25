@@ -1,7 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadData } from "../data/ActionCreators";
+import {
+  addToCart,
+  updateCartQuantity,
+  removeFromCart,
+  clearCart,
+} from "../data/CartActionCreators";
 import { DataTypes } from "../data/Types";
 import Shop from "./Shop";
 
@@ -9,7 +15,13 @@ const mapStateToProps = (dataStore) => ({
   ...dataStore,
 });
 
-const mapDispatchToProps = { loadData };
+const mapDispatchToProps = {
+  loadData,
+  addToCart,
+  updateCartQuantity,
+  removeFromCart,
+  clearCart,
+};
 
 const filterProducts = (products = [], category) => {
   console.log("inside filter: ", category);
@@ -44,7 +56,7 @@ function ShopConnectorPresent({ categories, products, loadData }) {
         element={
           <Shop
             categories={categories}
-            products={filterProducts(products, useParams().category)}
+            products={filterProducts(products, "running")}
           />
         }
       />
