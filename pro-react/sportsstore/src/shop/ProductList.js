@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProductList({ products }) {
+export default function ProductList({ products, addToCart }) {
   if (products == null || products.length === 0) {
     return <h5 className="p-2">No Products</h5>;
   } else {
@@ -12,7 +12,15 @@ export default function ProductList({ products }) {
             ${product.price.toFixed(2)}
           </span>
         </h4>
-        <div className="card-text bg-white p-1">{product.description}</div>
+        <div className="card-text bg-white p-1">
+          {product.description}
+          <button
+            className="btn btn-success btn-sm float-right"
+            onClick={() => addToCart(product)}
+          >
+            Add To Cart
+          </button>
+        </div>
       </div>
     ));
   }
