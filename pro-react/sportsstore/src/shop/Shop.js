@@ -3,13 +3,13 @@ import CartSummary from "./CartSummary";
 import CategoryNavigation from "./CategoryNavigation";
 import ProductList from "./ProductList";
 
-export default function Shop({ categories, products }) {
+export default function Shop({ categories, products, cartItems, cartPrice }) {
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col bg-dark text-white">
           <div className="navbar-brand">SPORTS STORE</div>
-          <CartSummary />
+          <CartSummary cartItems={cartItems} cartPrice={cartPrice} />
         </div>
       </div>
       <div className="row">

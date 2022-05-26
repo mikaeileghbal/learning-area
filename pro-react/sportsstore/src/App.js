@@ -1,7 +1,7 @@
 import { ShopConnector } from "./shop/ShopConnector";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import Shop from "./shop/Shop";
+
 import { sportsStoreDataStore } from "./data/DataStore";
 
 function App() {

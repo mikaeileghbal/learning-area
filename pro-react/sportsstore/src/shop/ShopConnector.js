@@ -49,7 +49,13 @@ function ShopConnectorPresent({ categories, products, loadData }) {
     <Routes>
       <Route
         path="/products"
-        element={<Shop categories={categories} products={products} />}
+        element={
+          <Shop
+            categories={categories}
+            products={products}
+            addToCart={addToCart}
+          />
+        }
       />
       <Route
         path="/products/:category"
@@ -57,6 +63,7 @@ function ShopConnectorPresent({ categories, products, loadData }) {
           <Shop
             categories={categories}
             products={filterProducts(products, "running")}
+            addToCart={addToCart}
           />
         }
       />
