@@ -13,3 +13,14 @@ console.log(helloWorld.includes("X"));
 
 const oBooleanTrue = new Boolean(true);
 console.log(oBooleanTrue.valueOf());
+
+const arr = [];
+for (let i = 0; i < 3; arr[i++] = 100);
+console.log(arr);
+
+console.log(Object.is(NaN, NaN));
+console.log(NaN === NaN);
+console.log(NaN == NaN);
+
+let fortyTwo = 42;
+console.log(fortyTwo.toString()[1]);
