@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const data = {
+const colorData = {
   colors: [
     {
       id: 1,
@@ -21,21 +21,38 @@ const data = {
 };
 
 const ColorContext = createContext();
+const useColors = () => useContext(ColorContext);
+
+function ColorProvider({ children }) {
+  const [data, setData] = useState(colorData);
+
+  const addColor = (name, code) => {
+    setData({
+      colors: [...data.colors, { id: 3, name, code }],
+    });
+  };
+
+  return (
+    <ColorContext.Provider value={{ data, addColor }}>
+      {children}
+    </ColorContext.Provider>
+  );
+}
 
 export default function ContexRoot() {
   return (
     <div>
       <h1>Using Context</h1>
-      <ColorContext.Provider value={{ data }}>
+      <ColorProvider>
         <ColorsList />
         <ColorListConsumer />
-      </ColorContext.Provider>
+      </ColorProvider>
     </div>
   );
 }
 
 function ColorsList() {
-  const { data } = useContext(ColorContext);
+  const { data, addColor } = useColors();
   console.log(data);
   if (data.colors.length === 0) {
     return <p>Empty list</p>;
@@ -48,6 +65,7 @@ function ColorsList() {
           <Color key={color.id} color={color} />
         ))}
       </ul>
+      <button onClick={() => addColor("yellow", "#ffff00")}>Add yellow</button>
     </>
   );
 }
