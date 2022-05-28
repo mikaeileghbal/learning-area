@@ -21,6 +21,7 @@ const colorData = {
 };
 
 const ColorContext = createContext();
+const useColors = () => useContext(ColorContext);
 
 function ColorProvider({ children }) {
   const [data, setData] = useState(colorData);
@@ -51,7 +52,7 @@ export default function ContexRoot() {
 }
 
 function ColorsList() {
-  const { data, addColor } = useContext(ColorContext);
+  const { data, addColor } = useColors();
   console.log(data);
   if (data.colors.length === 0) {
     return <p>Empty list</p>;
