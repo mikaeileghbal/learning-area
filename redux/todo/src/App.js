@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import AddTodo from "./components/AddTodo";
+import Content from "./components/Content";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         </a>
       </header>
       <AddTodo />
+      <Content />
     </div>
   );
 }
