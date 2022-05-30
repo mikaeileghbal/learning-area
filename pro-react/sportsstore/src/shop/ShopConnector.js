@@ -10,6 +10,7 @@ import {
 } from "../data/CartActionCreators";
 import { DataTypes } from "../data/Types";
 import Shop from "./Shop";
+import CartDetails from "./CartDetails";
 
 const mapStateToProps = (dataStore) => ({
   ...dataStore,
@@ -37,7 +38,18 @@ export const ShopConnector = connect(
   mapDispatchToProps
 )(ShopConnectorPresent);
 
-function ShopConnectorPresent({ categories, products, loadData }) {
+function ShopConnectorPresent({
+  categories,
+  products,
+  loadData,
+  cart,
+  cartItems,
+  cartPrice,
+  updateCartQuantity,
+  removeFromCart,
+  addToCart,
+}) {
+  console.log("cart in conetor:", cart);
   const { category } = useParams();
   console.log(category);
   const [, updateState] = useState();
@@ -58,6 +70,8 @@ function ShopConnectorPresent({ categories, products, loadData }) {
             categories={categories}
             products={filterProducts(products, category)}
             addToCart={addToCart}
+            cartItems={cartItems}
+            cartPrice={cartPrice}
           />
         }
       />
@@ -65,9 +79,22 @@ function ShopConnectorPresent({ categories, products, loadData }) {
         path="/products"
         element={
           <Shop
+            cartItems={cartItems}
+            cartPrice={cartPrice}
             categories={categories}
             products={products}
             addToCart={addToCart}
+          />
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <CartDetails
+            cartItems={cartItems}
+            cartPrice={cartPrice}
+            updateCartQuantity={updateCartQuantity}
+            removeFromCart={removeFromCart}
           />
         }
       />

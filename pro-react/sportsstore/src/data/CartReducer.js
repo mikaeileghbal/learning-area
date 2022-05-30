@@ -4,17 +4,21 @@ export const CartReducer = (storeDate, action) => {
   let newData = { cart: [], cartItems: 0, cartPrice: 0, ...storeDate };
   switch (action.type) {
     case ActionTypes.CART_ADD:
+      console.log("reduce product:", action.payload.product);
       const p = action.payload.product;
       const q = action.payload.quantity;
-
-      let exist = newData.find((item) => item.product.id === p.id);
+      console.log(p.id);
+      let exist = newData.cart.find((item) => item.product.id === p.id);
+      console.log("exist: ", exist);
       if (exist) {
         exist.quantity += q;
       } else {
+        console.log("new cart item");
         newData.cart = [...newData.cart, action.payload];
       }
       newData.cartItems += q;
       newData.cartPrice += p.price * q;
+      console.log("new Data:", newData);
       return newData;
 
     case ActionTypes.CART_UPDATE:
