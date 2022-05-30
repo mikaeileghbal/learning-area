@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadData } from "../data/ActionCreators";
@@ -39,8 +39,12 @@ export const ShopConnector = connect(
 
 function ShopConnectorPresent({ categories, products, loadData }) {
   const { category } = useParams();
+  console.log(category);
+  const [, updateState] = useState();
 
-  console.log("category param: ", category);
+  useEffect(() => {
+    updateState("");
+  }, [category]);
 
   loadData(DataTypes.CATEGORIES);
   loadData(DataTypes.PRODUCTS);
@@ -48,21 +52,21 @@ function ShopConnectorPresent({ categories, products, loadData }) {
   return (
     <Routes>
       <Route
-        path="/products"
+        path="/products/:category"
         element={
           <Shop
             categories={categories}
-            products={products}
+            products={filterProducts(products, category)}
             addToCart={addToCart}
           />
         }
       />
       <Route
-        path="/products/:category"
+        path="/products"
         element={
           <Shop
             categories={categories}
-            products={filterProducts(products, "running")}
+            products={products}
             addToCart={addToCart}
           />
         }

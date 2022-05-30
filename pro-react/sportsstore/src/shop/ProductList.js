@@ -8,13 +8,16 @@ export default function ProductList({ products }) {
       <div className="card m-1 p-1 bg-light" key={product.id}>
         <h4>
           {product.name}
-          <span class="badge badge-pill badge-secondary bg-primary">
+          <span
+            class="badge badge-pill badge-secondary bg-primary"
+            style={{ float: "right" }}
+          >
             ${product.price.toFixed(2)}
           </span>
         </h4>
         <div className="card-text bg-white p-1">
           {product.description}
-          <button className="btn btn-success btn-sm float-right">
+          <button className="btn btn-success btn-sm" style={{ float: "right" }}>
             Add To Cart
           </button>
         </div>
