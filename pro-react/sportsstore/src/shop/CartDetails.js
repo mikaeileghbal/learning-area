@@ -29,7 +29,7 @@ export default function CartDetails({
         </tbody>
       </table>
       <div>
-        <Link to="/">Continue Shopping</Link>
+        <Link to="/products">Continue Shopping</Link>
         <Link to="/checkout">Checkout</Link>
       </div>
     </div>

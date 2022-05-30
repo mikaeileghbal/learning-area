@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function CartSummary({ cartItems, cartPrice }) {
+  console.log("in summary:", cartItems);
   const getSummary = () => {
+    console.log("get summary:", cartItems);
     if (cartItems > 0) {
       return (
         <span>
@@ -23,7 +25,10 @@ export default function CartSummary({ cartItems, cartPrice }) {
       <small>
         {getSummary()}
         <Link to="/cart" className={getLinkClasses()}>
-          <i className="fa fa-shopping-cart"></i>
+          <i
+            className="fa fa-shopping-cart"
+            style={{ color: "white", float: "right" }}
+          ></i>
         </Link>
       </small>
     </div>

@@ -3,7 +3,14 @@ import CartSummary from "./CartSummary";
 import CategoryNavigation from "./CategoryNavigation";
 import ProductList from "./ProductList";
 
-export default function Shop({ categories, products, cartItems, cartPrice }) {
+export default function Shop({
+  categories,
+  products,
+  cartItems,
+  cartPrice,
+  addToCart,
+}) {
+  console.log("in Shop:", cartItems);
   return (
     <div className="container-fluid">
       <div className="row">
@@ -17,7 +24,7 @@ export default function Shop({ categories, products, cartItems, cartPrice }) {
           <CategoryNavigation categories={categories} baseUrl="/products" />
         </div>
         <div className="col-9 p-2">
-          <ProductList products={products} />
+          <ProductList products={products} addToCart={addToCart} />
         </div>
       </div>
     </div>
