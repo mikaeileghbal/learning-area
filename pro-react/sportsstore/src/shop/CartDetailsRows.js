@@ -7,6 +7,7 @@ export default function CartDetailsRows({
   const handleChange = (product, e) => {
     updateQuantity(product, e.target.value);
   };
+
   if (!cart || cart.length === 0) {
     return (
       <tr>
@@ -21,12 +22,12 @@ export default function CartDetailsRows({
             <td>
               <input
                 type="number"
-                value={item.quantuty}
+                value={item.quantity}
                 onChange={(e) => handleChange(item.product, e)}
               />
             </td>
             <td>{item.product.name}</td>
-            <td>${item.price.toFixed(2)}</td>
+            <td>${item.product.price.toFixed(2)}</td>
             <td>{(item.quantity * item.product.price).toFixed(2)}</td>
             <td>
               <button
@@ -39,7 +40,9 @@ export default function CartDetailsRows({
           </tr>
         ))}
         <tr>
-          <th colSpan="3">Total:</th>
+          <th colSpan="3" className="text-right">
+            Total:
+          </th>
           <th colSpan="2">${cartPrice.toFixed(2)}</th>
         </tr>
       </>

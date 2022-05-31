@@ -1,8 +1,10 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import { asyncActions } from "./AsyncMiddleware";
 import { CartReducer } from "./CartReducer";
 import { CommonReducer } from "./CommonReducer";
 import { ShopReducer } from "./ShopReducer";
 
 export const sportsStoreDataStore = createStore(
-  CommonReducer(ShopReducer, CartReducer)
+  CommonReducer(ShopReducer, CartReducer),
+  applyMiddleware(asyncActions)
 );

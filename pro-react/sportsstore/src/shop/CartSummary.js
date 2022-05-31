@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function CartSummary({ cartItems, cartPrice }) {
-  console.log("in summary:", cartItems);
   const getSummary = () => {
-    console.log("get summary:", cartItems);
     if (cartItems > 0) {
       return (
         <span>

@@ -3,20 +3,25 @@ import CartDetailsRows from "./CartDetailsRows";
 
 export default function CartDetails({
   cart,
-  cartPrice,
+  cartItems = 0,
+  cartPrice = 0,
   updateCartQuantity,
   removeFromCart,
 }) {
+  const getLinkClasses = () =>
+    `btn btn-secondary m-1  ${cartItems === 0 ? "disabled" : ""}`;
+
   return (
-    <div>
-      <h2>Your Cart</h2>
-      <table>
+    <div className="m-3">
+      <h2 className="text-center">Your Cart</h2>
+      <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Quantity</th>
             <th>Profuct</th>
-            <th>Price</th>
-            <th>Subtotal</th>
+            <th className="text-right">Price</th>
+            <th className="text-right">Subtotal</th>
+            <th />
           </tr>
         </thead>
         <tbody>
@@ -28,9 +33,13 @@ export default function CartDetails({
           />
         </tbody>
       </table>
-      <div>
-        <Link to="/products">Continue Shopping</Link>
-        <Link to="/checkout">Checkout</Link>
+      <div className="text-center">
+        <Link to="/products" className="btn btn-primary m-1">
+          Continue Shopping
+        </Link>
+        <Link to="/checkout" className={getLinkClasses()}>
+          Checkout
+        </Link>
       </div>
     </div>
   );

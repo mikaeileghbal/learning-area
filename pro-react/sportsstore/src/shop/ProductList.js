@@ -10,7 +10,7 @@ export default function ProductList({ products, addToCart }) {
           {product.name}
           <span
             class="badge badge-pill badge-secondary bg-primary"
-            style={{ float: "right" }}
+            style={{ float: "right", borderRadius: "20px" }}
           >
             ${product.price.toFixed(2)}
           </span>

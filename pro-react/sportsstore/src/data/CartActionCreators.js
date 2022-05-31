@@ -1,15 +1,12 @@
 import { ActionTypes } from "./Types";
 
-export const addToCart = (product, quantity) => {
-  console.log("action product: ", product);
-  return {
-    type: ActionTypes.CART_ADD,
-    payload: {
-      product,
-      quantity: quantity || 1,
-    },
-  };
-};
+export const addToCart = (product, quantity) => ({
+  type: ActionTypes.CART_ADD,
+  payload: {
+    product,
+    quantity: quantity || 1,
+  },
+});
 
 export const updateCartQuantity = (product, quantity) => ({
   type: ActionTypes.CART_UPDATE,
