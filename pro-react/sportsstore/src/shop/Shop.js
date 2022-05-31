@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import CartSummary from "./CartSummary";
 import CategoryNavigation from "./CategoryNavigation";
 import ProductList from "./ProductList";
@@ -10,7 +11,12 @@ export default function Shop({
   cartPrice,
   addToCart,
 }) {
-  console.log("in Shop:", cartItems);
+  const navigate = useNavigate();
+
+  const handleAddToCart = (...args) => {
+    addToCart(...args);
+    navigate("/cart");
+  };
   return (
     <div className="container-fluid">
       <div className="row">
@@ -24,7 +30,7 @@ export default function Shop({
           <CategoryNavigation categories={categories} baseUrl="/products" />
         </div>
         <div className="col-9 p-2">
-          <ProductList products={products} addToCart={addToCart} />
+          <ProductList products={products} addToCart={handleAddToCart} />
         </div>
       </div>
     </div>

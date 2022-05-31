@@ -5,7 +5,7 @@ const cors = require("cors");
 const data = require("./data");
 
 const fileName = process.argv[2] || "./data.js";
-console.log(fileName);
+
 const port = process.argv[3] || 3500;
 
 let router = undefined;

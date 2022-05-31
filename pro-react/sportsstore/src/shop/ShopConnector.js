@@ -49,9 +49,9 @@ function ShopConnectorPresent({
   removeFromCart,
   addToCart,
 }) {
-  console.log("cart in conetor:", cart);
   const { category } = useParams();
   console.log(category);
+
   const [, updateState] = useState();
 
   useEffect(() => {
@@ -68,7 +68,7 @@ function ShopConnectorPresent({
         element={
           <Shop
             categories={categories}
-            products={filterProducts(products, category)}
+            products={filterProducts(products, "running")}
             addToCart={addToCart}
             cartItems={cartItems}
             cartPrice={cartPrice}
@@ -91,6 +91,7 @@ function ShopConnectorPresent({
         path="/cart"
         element={
           <CartDetails
+            cart={cart}
             cartItems={cartItems}
             cartPrice={cartPrice}
             updateCartQuantity={updateCartQuantity}
