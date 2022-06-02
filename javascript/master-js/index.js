@@ -57,3 +57,32 @@ function demFunction(a, passedFunction) {
 }
 
 demFunction("smallcase", changeCase);
+
+var scope_name = "global";
+
+function showScopeName() {
+  var scope_name = "local";
+  console.log(scope_name);
+}
+
+console.log(scope_name);
+showScopeName();
+console.log(scope_name);
+
+(function foo(b) {
+  let a = 2;
+  console.log(a + b);
+})(3);
+
+let sayMoo;
+const condition = false;
+if (condition) {
+  sayMoo = function () {
+    console.log("TrueMoo");
+  };
+} else {
+  sayMoo = function () {
+    console.log("FalseMoo");
+  };
+}
+sayMoo();
