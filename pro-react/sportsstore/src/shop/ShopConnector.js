@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadData } from "../data/ActionCreators";
@@ -58,9 +58,11 @@ function ShopConnectorPresent({
     updateState("");
   }, [category]);
 
-  loadData(DataTypes.CATEGORIES);
-  loadData(DataTypes.PRODUCTS);
-
+  useEffect(() => {
+    loadData(DataTypes.CATEGORIES);
+    loadData(DataTypes.PRODUCTS);
+  }, [loadData]);
+d
   return (
     <Routes>
       <Route
