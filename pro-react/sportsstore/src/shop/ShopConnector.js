@@ -62,7 +62,7 @@ function ShopConnectorPresent({
     loadData(DataTypes.CATEGORIES);
     loadData(DataTypes.PRODUCTS);
   }, [loadData]);
-d
+
   return (
     <Routes>
       <Route

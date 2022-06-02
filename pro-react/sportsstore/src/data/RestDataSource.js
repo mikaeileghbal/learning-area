@@ -2,10 +2,9 @@ import Axios from "axios";
 import { RestUrls } from "./Urls";
 
 export class RestDataSource {
-  GetData = (dataType) => {
-    console.log("inside RestDataSource");
-    return this.SendRequest("get", RestUrls[dataType]);
+  GetData = (dataType, params) => {
+    return this.SendRequest("get", RestUrls[dataType], params);
   };
 
-  SendRequest = (method, url) => Axios.request({ method, url });
+  SendRequest = (method, url, params) => Axios.request({ method, url, params });
 }
