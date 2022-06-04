@@ -86,3 +86,19 @@ if (condition) {
   };
 }
 sayMoo();
+
+// inline function
+
+function setActiveTab(activeTabHandler, tab) {
+  // set active tab
+  // call handler
+  activeTabHandler();
+}
+
+setActiveTab(function () {
+  console.log("Setting active tab");
+}, 1);
+
+setActiveTab(function handler() {
+  console.log("Setting active tab named function");
+}, 2);
