@@ -182,6 +182,95 @@ function draw(shape_name) {
   }
   shape();
 }
-
 draw("square");
 draw("circle");
+
+// CLOSURES
+// closure is the scope created when a function is declared
+// allows the funciton to access variables that are external to this function
+
+let outer = "I am outer";
+function outerFunction() {
+  console.log(outer);
+}
+outerFunction();
+
+let copy;
+
+function outerFunction2() {
+  let inner = "I am inner";
+
+  function innerFunction() {
+    console.log(outer);
+    console.log(inner);
+  }
+
+  copy = innerFunction;
+}
+outerFunction2();
+copy();
+
+console.log(magic);
+var magic = "magic";
+console.log(magic);
+
+// timers and callbacks
+function delay(message) {
+  setTimeout(function timerFunction() {
+    console.log(message);
+  }, 1000);
+}
+delay("Hello World!");
+
+// private variables
+function PrivateTest() {
+  let points = 0;
+  this.getPoints = function () {
+    return points;
+  };
+  this.score = function () {
+    points++;
+  };
+}
+const private = new PrivateTest();
+private.score();
+console.log(private.points);
+console.log(private.getPoints());
+
+// Loops and closures
+for (var i = 0; i < 6; i++) {
+  setTimeout(function delay() {
+    console.log(i);
+  }, i * 100);
+}
+
+// Modules
+const moduleName = function () {
+  // private state
+  // private functions
+  return {
+    // public state
+    // public variables
+  };
+};
+
+const superModule = (function () {
+  const secret = "supersecretkey";
+  const passcode = "nuke";
+
+  function getSecret() {
+    console.log(secret);
+  }
+
+  function getPassCode() {
+    console.log(passcode);
+  }
+
+  return {
+    getSecret,
+    getPassCode,
+  };
+})();
+
+superModule.getSecret();
+superModule.getPassCode();
