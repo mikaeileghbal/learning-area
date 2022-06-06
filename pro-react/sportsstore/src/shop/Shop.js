@@ -20,7 +20,7 @@ export default function Shop({
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col bg-dark text-white">
+        <div className="col bg-dark text-white d-flex justify-content-between align-items-center">
           <div className="navbar-brand">SPORTS STORE</div>
           <CartSummary cartItems={cartItems} cartPrice={cartPrice} />
         </div>

@@ -86,3 +86,18 @@ if (condition) {
   };
 }
 sayMoo();
+
+// argumnets
+
+function sum() {
+  let total = 0;
+  let args = Array.prototype.slice.call(arguments);
+  console.log(args);
+  for (let i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  return total;
+}
+
+console.log(sum(1, 2, 3));
+console.log(sum(1, 2, 3, 4, 5, 6));
