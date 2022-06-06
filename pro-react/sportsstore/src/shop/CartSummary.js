@@ -23,10 +23,7 @@ export default function CartSummary({ cartItems, cartPrice }) {
       <small>
         {getSummary()}
         <Link to="/cart" className={getLinkClasses()}>
-          <i
-            className="fa fa-shopping-cart"
-            style={{ color: "white", float: "right" }}
-          ></i>
+          <i className="fa fa-shopping-cart" style={{ color: "white" }}></i>
         </Link>
       </small>
     </div>
