@@ -66,3 +66,67 @@ const newHtmlString = htmlString.replace(regExAtSpan, function (matchingText) {
   return "p";
 });
 log(newHtmlString);
+
+// String.split()
+const strColor = "sun,moon,stars";
+const reComma = /\,/;
+log(strColor.split(reComma));
+log(strColor.split(","));
+
+const strToMatch = "wooden bat, smelly Cat,a fat cat";
+const reMatch = /[bcf]at/gi;
+const matchedStrs = strToMatch.match(reMatch);
+log(matchedStrs);
+
+const strToMatch2 = "i1,i2,i3,i4,i5,i6,i7,i8,i9";
+const reMatch2 = /i[0-5]/gi;
+let matchedStrs2 = strToMatch2.match(reMatch2);
+log(matchedStrs2);
+
+const reMatch3 = /i[^0-5]/gi;
+matchedStrs2 = strToMatch2.match(reMatch3);
+log(matchedStrs2);
+
+// \d Any digit character
+// \w An alphanumeric character (word character)
+// \s Any whitespace character (space, tab, newline, and similar)
+// \D A character that is not a digit
+// \W A non-alphanumeric character
+// \S A non-whitespace character
+// . Any character except for newline
+
+// Repeating patters
+
+// ?: Either 0 or 1 occurrence (marks the occurrence as optional)
+// *: 0 or more occurrences
+// +: 1 or more occurrences
+// {n}: Exactly n occurrences
+// {n,m}: Occurrences between n and m
+// {n,}: At least an n occurrence
+// {,n}: 0 to n occurrences
+
+log(/\bcat\b/.test("a cat tomcat"));
+
+let matchObj = /\d+/.exec("There are 100 ways to do this");
+log(matchObj);
+log(matchObj.index);
+
+// Backreference
+const reBack = /^([XYZ])a\1/;
+const strBack = "YaY";
+log(reBack.test(strBack));
+
+const original = "1234 5678";
+const reReverse = /(\d{4}) (\d{4})/;
+console.log(original.replace(reReverse, "$2 $1"));
+
+// Trim
+function trim(str) {
+  return (str || "").replace(/^\s+|\s+$/g, "");
+}
+log("--" + trim("    test     ") + "--");
+
+function removeExtraSpace(str) {
+  return (str || "").replace(/\s+/g, " ");
+}
+log(removeExtraSpace("There are      a    lot    of spaces."));
