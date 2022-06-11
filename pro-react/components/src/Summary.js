@@ -1,7 +1,11 @@
 import React from "react";
 import CallbackButton from "./CallbackButton";
+import SimpleButton from "./SimpleButton";
 
 export default function Summary({ name, index, promote }) {
+  const onClick = (e) => {
+    console.log("Clicked...");
+  };
   if (String(name).length >= 4) {
     return (
       <>
@@ -16,6 +20,11 @@ export default function Summary({ name, index, promote }) {
           />
           <CallbackButton disabled={true} />
           <CallbackButton disabled="true" />
+          <SimpleButton
+            className="btn btn-primary btn-sm m-1"
+            text={name}
+            onPromote={onClick}
+          />
         </td>
       </>
     );
