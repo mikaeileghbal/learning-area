@@ -68,12 +68,12 @@ function ShopConnectorPresent({
       <Route
         path="/products/:category"
         element={
-          <Shop
-            categories={categories}
-            products={filterProducts(products, "running")}
-            addToCart={addToCart}
+          <FilteredShop
             cartItems={cartItems}
             cartPrice={cartPrice}
+            categories={categories}
+            products={products}
+            addToCart={addToCart}
           />
         }
       />
@@ -102,5 +102,18 @@ function ShopConnectorPresent({
         }
       />
     </Routes>
+  );
+}
+
+function FilteredShop({ categories, products, cartItems, cartPrice }) {
+  const { category } = useParams();
+  return (
+    <Shop
+      categories={categories}
+      products={filterProducts(products, category)}
+      addToCart={addToCart}
+      cartItems={cartItems}
+      cartPrice={cartPrice}
+    />
   );
 }
