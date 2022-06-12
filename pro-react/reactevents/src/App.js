@@ -1,25 +1,48 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const [message, setMessage] = useState("Ready");
+  const [theme, setTheme] = useState("primary");
 
-  const eventHandler = () => {
-    setMessage("Clicked!");
+  const eventHandler = (event, theme) => {
+    setMessage(`Event: ${event.type}`);
+    setTheme(theme);
   };
+
+  const mouseHandler = (event) => {
+    if (event.type === "mousedown") {
+      setMessage(`Down`);
+    } else {
+      setMessage(`Up`);
+    }
+  };
+
+  useEffect(() => {
+    console.log(message, " changed");
+  }, [message]);
 
   return (
     <div className="m-2">
-      <div className="h4 bg-primary text-white text-center p-2">{message}</div>
+      <div className={`h4 bg-${theme} text-white text-center p-2`}>
+        {message}
+      </div>
       <div className="text-center">
         <button
           className="btn btn-primary"
-          // onClick={() => setMessage("Clicked")}
-          onClick={eventHandler}
+          onClick={(e) => eventHandler(e, "primary")}
+          onMouseDown={mouseHandler}
+          onMouseUp={mouseHandler}
         >
-          Click Me
+          Normal
+        </button>
+        <button
+          className="btn btn-danger m-1"
+          onClick={(e) => eventHandler(e, "danger")}
+        >
+          Danger
         </button>
       </div>
     </div>
@@ -35,6 +58,12 @@ export default App;
 //     this.state = {
 //       message: "Ready",
 //     };
+
+//     this.eventHandler = this.eventHandler.bind(this);
+//   }
+
+//   eventHandler() {
+//     this.setState({ message: "Clicked!" });
 //   }
 
 //   render() {
@@ -46,7 +75,8 @@ export default App;
 //         <div className="text-center">
 //           <button
 //             className="btn btn-primary"
-//             onClick={() => this.setState({ message: "Clicked!" })}
+//             //onClick={() => this.setState({ message: "Clicked!" })}
+//             onClick={this.eventHandler}
 //           >
 //             Click Me
 //           </button>
