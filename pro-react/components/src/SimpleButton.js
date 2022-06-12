@@ -37,5 +37,6 @@ export default class SimpleButton extends Component {
       }
     );
     this.props.onPromote();
+    this.props.onIncrement(1);
   };
 }
