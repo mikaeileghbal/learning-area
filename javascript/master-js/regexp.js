@@ -130,3 +130,49 @@ function removeExtraSpace(str) {
   return (str || "").replace(/\s+/g, " ");
 }
 log(removeExtraSpace("There are      a    lot    of spaces."));
+
+// Arrays
+
+const arr1 = new Array(1, 2, 3);
+const arr2 = Array(1, 2, 3);
+const arr3 = [1, 2, 3];
+log(arr3);
+// One argument is length of array
+const arrLenght = Array(10);
+
+const colors = ["red", "green", "blue"];
+colors.forEach(function (color) {
+  log(color);
+});
+
+const newColors = colors.concat("yello", "brown");
+log(newColors);
+log(newColors.reverse());
+
+function print(item) {
+  log(item);
+}
+newColors.forEach(print);
+
+// Maps
+let founders = new Map();
+founders.set("facebook", "mark");
+founders.set("google", "larry");
+log(founders.size);
+log(founders.get("tweeter"));
+log(founders.has("yahoo"));
+
+for (let [key, value] of founders) {
+  log(`${key} founded by ${value}`);
+}
+
+const a = [];
+a[5] = 5;
+
+for (let i = 0; i < a.length; i++) {
+  log(a[i]);
+}
+
+for (let x in a) {
+  log(x);
+}
