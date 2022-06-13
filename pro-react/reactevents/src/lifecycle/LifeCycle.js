@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function LifeCycle() {
@@ -21,6 +21,11 @@ export default function LifeCycle() {
             message={`Counter: ${counter}`}
             callback={incrementCounter}
             text="Increment Counter"
+          />
+          <HookMessage
+            callback={incrementCounter}
+            message={counter}
+            text="increment"
           />
         </div>
         <div className="col-4">
@@ -106,6 +111,29 @@ function ExternalCunter() {
     <div>
       <ActionButton callback={incrementCounter} text="External Counter" />
       <div className="h5 text-center p-2">External: {externalCounter}</div>
+    </div>
+  );
+}
+
+function HookMessage({ message, callback, text }) {
+  const [showSpan, setShowSpan] = useState(false);
+
+  const handleClick = (e) => {
+    setShowSpan(!showSpan);
+    callback(e);
+  };
+
+  useEffect(() => {
+    console.log("useEffect function invoked");
+    return () => {
+      console.log("useEffect cleanup");
+    };
+  });
+
+  return (
+    <div>
+      <ActionButton theme="primary" callback={handleClick} text={text} />
+      <div className="h5 text-center p-2"> {message}</div>
     </div>
   );
 }
