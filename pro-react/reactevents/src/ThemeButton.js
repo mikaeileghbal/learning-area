@@ -6,6 +6,10 @@ export default function ThemeBUtton({ theme, callback }) {
     console.log(`Target : ${event.target.tagName}`);
     console.log(`Current target: ${event.currentTarget.tagName}`);
     if (capturePhase) {
+      if (theme === "danger") {
+        event.stopPropagation();
+        console.log("stopped event");
+      }
       console.log("skipped function prop: capture phase");
     } else if (event.bubbles && event.target !== event.currentTarget) {
       console.log("skipped function prop: bubble phase");
