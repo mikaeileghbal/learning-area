@@ -142,3 +142,75 @@ Player.noOfPlayers = 0;
   golfer.switchHands();
   console.log(golfer.batPreference);
 })();
+
+// Inheritance with Prototype
+function Person() {}
+Person.prototype.cry = function () {
+  console.log("Crying");
+};
+
+function Child() {}
+Child.prototype = new Person();
+
+const aChild = new Child();
+console.log(aChild instanceof Child);
+console.log(aChild instanceof Person);
+console.log(aChild instanceof Object);
+
+// Create Heirarchy
+
+function Employee() {
+  this.name = "";
+  this.dept = "None";
+  this.salary = 0.0;
+}
+
+function Manager() {
+  Employee.call(this);
+  this.reports = [];
+}
+//Manager.prototype = new Employee();
+Manager.prototype = Object.create(Employee.prototype);
+
+function IndividualContributer() {
+  Employee.call(this);
+  this.active_prokects = [];
+}
+//IndividualContributer.prototype = new Employee();
+IndividualContributer.prototype = Object.create(Employee.prototype);
+
+function TeamLead() {
+  Manager.call(this);
+  this.dept = "Software";
+  this.salary = 100000;
+}
+//TeamLead.prototype = new Manager();
+TeamLead.prototype = Object.create(Manager.prototype);
+
+function Engineer() {
+  TeamLead.call(this);
+  this.dept = "JavaScript";
+  thgis.desktop_id = "8822";
+  this.salary = 80000;
+}
+//Engineer.prototype = new TeamLead();
+Engineer.prototype = Object.create(TeamLead.prototype);
+
+const genericEmployee = new Employee();
+console.log(genericEmployee);
+
+const karen = new Manager();
+karen.name = "Karen";
+karen.reports = [1, 2, 3];
+console.log(karen);
+
+const jason = new TeamLead();
+jason.name = "Jason";
+console.log(jason);
+
+String.prototype.reverse = function () {
+  return Array.prototype.reverse.apply(this.split("")).join("");
+};
+
+const str = "JavaScript";
+console.log(str.reverse());
