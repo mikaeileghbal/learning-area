@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.css";
 
 export default function LifeCycle() {
   const [counter, setCounter] = useState(0);
@@ -12,9 +11,8 @@ export default function LifeCycle() {
   console.log(`Render App component`);
   return (
     <div className="container text-center">
-      <div className="row p-2">
-        <h1>LifeCycle</h1>
-      </div>
+      <h1 className="bg-primary text-center text-white">LifeCycle</h1>
+      <div className="row p-2"></div>
       <div className="row p-2">
         <div className="col-4">
           <Message

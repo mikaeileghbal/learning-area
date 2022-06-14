@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
 import ThemeBUtton from "./ThemeButton";
 
 function App() {
