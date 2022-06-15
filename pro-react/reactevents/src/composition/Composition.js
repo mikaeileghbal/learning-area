@@ -1,6 +1,15 @@
-import React, { Children, cloneElement, useState } from "react";
+import React, {
+  Children,
+  cloneElement,
+  Component,
+  createContext,
+  useState,
+} from "react";
 
 const ProList = ProFeature(SpecializedList);
+const ProListStatefull = ProConroller(SpecializedList);
+
+const ProModeContext = createContext({ proMode: true });
 
 export default function Composition() {
   const [counter, setCounter] = useState(0);
@@ -40,7 +49,9 @@ export default function Composition() {
                   value={proMode}
                   onChange={changeProMode}
                 />
-                <label className="form-check-label">Pro Mode</label>
+                <label className="form-check-label">
+                  Pro Mode with context
+                </label>
               </div>
             </div>
           </div>
@@ -55,7 +66,9 @@ export default function Composition() {
               <SpecializedList list={names} />
             </div>
             <div className="col-3">
-              <ProList pro={proMode} list={cities} />
+              <ProModeContext.Provider value={{ proMode }}>
+                <ProListStatefull list={cities} />
+              </ProModeContext.Provider>
             </div>
           </div>
         </div>
@@ -65,10 +78,34 @@ export default function Composition() {
 }
 
 function ActionButton({ text, theme, callback }) {
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleClick = (e) => {
+    setClickCount(clickCount + 1);
+    callback();
+  };
+
+  const getClasses = (proMode) => {
+    let col = proMode ? theme : "danger";
+    return `btn btn-${col} m-2`;
+  };
   return (
-    <button className={`btn btn-${theme} m-2`} onClick={callback}>
-      {text}
-    </button>
+    <ProModeContext.Consumer>
+      {(contextData) => {
+        if (clickCount > 1) {
+          throw new Error("Click counter error");
+        }
+        return (
+          <button
+            className={getClasses(contextData.proMode)}
+            onClick={handleClick}
+            disabled={!contextData.proMode}
+          >
+            {text}
+          </button>
+        );
+      }}
+    </ProModeContext.Consumer>
   );
 }
 
@@ -141,8 +178,11 @@ function SpecializedList({ list }) {
 
   return (
     <div>
-      <GeneralList theme="info" list={getList()} />;
-      <ActionButton theme="primary" text="Sort" callback={toggleSort} />
+      <ErrorBoundry>
+        <h1>Error Handling</h1>
+        <GeneralList theme="info" list={getList()} />
+        <ActionButton theme="primary" text="Sort" callback={toggleSort} />
+      </ErrorBoundry>
     </div>
   );
 }
@@ -160,4 +200,71 @@ function ProFeature(FeatureComponent) {
       );
     }
   };
+}
+
+function ProConroller(FeatureComponent) {
+  const ProtectedFeature = ProFeature(FeatureComponent);
+
+  return function Test(props) {
+    const [proMode, setProMode] = useState(false);
+
+    const toggleProMode = () => {
+      setProMode(!proMode);
+    };
+
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={proMode}
+                onChange={toggleProMode}
+              />
+              <label className="form-check-label">Pro Mode</label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <ProtectedFeature {...props} pro={proMode} />
+          </div>
+        </div>
+      </div>
+    );
+  };
+}
+
+class ErrorBoundry extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      errorThrown: false,
+    };
+
+    console.log("error boundry");
+  }
+
+  componentDidCatch = (error, info) => {
+    console.log("catch");
+    this.setState({
+      errorThrown: true,
+    });
+  };
+
+  render() {
+    return (
+      <>
+        {this.state.errorThrown && (
+          <h3 className="bg-danger text-white text-center m-2 p-2">
+            Error Detected
+          </h3>
+        )}
+        {this.props.children}
+      </>
+    );
+  }
 }
