@@ -1,11 +1,21 @@
 import React, { Children, cloneElement, useState } from "react";
 
+const ProList = ProFeature(SpecializedList);
+
 export default function Composition() {
   const [counter, setCounter] = useState(0);
+  const [proMode, setProMode] = useState(false);
+
   const names = ["Zoe", "Bob", "Alice", "Dora", "Joe"];
+  const cities = ["London", "New York", "Paris", "Milan", "Boston"];
 
   const incrementCounter = () => {
     setCounter(counter + 1);
+  };
+
+  const changeProMode = (e) => {
+    setProMode(!proMode);
+    console.log(proMode);
   };
 
   return (
@@ -22,11 +32,30 @@ export default function Composition() {
         </ThemeSelector>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-6">
+            <div className="col-2 p-2">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value={proMode}
+                  onChange={changeProMode}
+                />
+                <label className="form-check-label">Pro Mode</label>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
               <GeneralList list={names} theme="primary" />
             </div>
-            <div className="col-6">
+            <div className="col-3">
+              <ProList pro={proMode} list={names} />
+            </div>
+            <div className="col-3">
               <SpecializedList list={names} />
+            </div>
+            <div className="col-3">
+              <ProList pro={proMode} list={cities} />
             </div>
           </div>
         </div>
@@ -116,4 +145,19 @@ function SpecializedList({ list }) {
       <ActionButton theme="primary" text="Sort" callback={toggleSort} />
     </div>
   );
+}
+
+function ProFeature(FeatureComponent) {
+  return function (props) {
+    if (props.pro) {
+      let { pro, ...childProps } = props;
+      return <FeatureComponent {...childProps} />;
+    } else {
+      return (
+        <h5 className="bg-warning text-white text-center">
+          This is a pro feature
+        </h5>
+      );
+    }
+  };
 }
