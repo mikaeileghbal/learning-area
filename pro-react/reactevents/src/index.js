@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import LifeCycle from "./lifecycle/LifeCycle";
 import "bootstrap/dist/css/bootstrap.css";
 import Composition from "./composition/Composition";
+import Forms from "./forms/Forms";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,6 +22,9 @@ const compositionRoot = ReactDOM.createRoot(
   document.getElementById("composition")
 );
 compositionRoot.render(<Composition />);
+
+const formsRoot = ReactDOM.createRoot(document.getElementById("forms"));
+formsRoot.render(<Forms />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
