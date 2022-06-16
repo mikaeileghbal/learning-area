@@ -42,7 +42,10 @@ function globalAlias() {
 }
 log(globalAlias());
 
+// ==============================================
 // All public and private members of an object
+// This the way of javascript of creating classes
+// ==============================================
 
 function Player(name, sport, age, country) {
   this.constructor.noOfPlayers++;
@@ -159,25 +162,25 @@ console.log(aChild instanceof Object);
 
 // Create Heirarchy
 
-function Employee() {
+function EmployeeFactory() {
   this.name = "";
   this.dept = "None";
   this.salary = 0.0;
 }
 
 function Manager() {
-  Employee.call(this);
+  EmployeeFactory.call(this);
   this.reports = [];
 }
 //Manager.prototype = new Employee();
-Manager.prototype = Object.create(Employee.prototype);
+Manager.prototype = Object.create(EmployeeFactory.prototype);
 
 function IndividualContributer() {
-  Employee.call(this);
+  EmployeeFactory.call(this);
   this.active_prokects = [];
 }
 //IndividualContributer.prototype = new Employee();
-IndividualContributer.prototype = Object.create(Employee.prototype);
+IndividualContributer.prototype = Object.create(EmployeeFactory.prototype);
 
 function TeamLead() {
   Manager.call(this);
@@ -196,7 +199,7 @@ function Engineer() {
 //Engineer.prototype = new TeamLead();
 Engineer.prototype = Object.create(TeamLead.prototype);
 
-const genericEmployee = new Employee();
+const genericEmployee = new EmployeeFactory();
 console.log(genericEmployee);
 
 const karen = new Manager();
@@ -214,3 +217,41 @@ String.prototype.reverse = function () {
 
 const str = "JavaScript";
 console.log(str.reverse());
+
+const worker = {
+  firstname: "Michael",
+  lastname: "Jordan",
+  get fullname() {
+    return this.firstname + " " + this.lastname;
+  },
+  set fullname(name) {
+    let words = name.split(" ");
+    this.firstname = words[0];
+    this.lastname = words[1];
+  },
+};
+
+worker.fullname = "Issac Newton";
+console.log(worker.firstname);
+console.log(worker.lastname);
+console.log(worker.fullname);
+
+const worker2 = {
+  firstname: "Alert",
+  lastname: "Einstein",
+};
+Object.defineProperty(worker2, "fullname", {
+  get: function () {
+    return this.firstname + " " + this.lastname;
+  },
+  set: function (name) {
+    let words = name.split(" ");
+    this.firstname = words[0];
+    this.lastname = words[1];
+  },
+});
+
+worker2.fullname = "Issac Newton";
+console.log(worker2.firstname);
+console.log(worker2.lastname);
+console.log(worker2.fullname);
