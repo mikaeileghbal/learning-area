@@ -30,6 +30,8 @@ function Editor({ submit }) {
     flavor: "",
     toppings: [],
     flavorSecond: "",
+    twoScoops: false,
+    toppingsCheck: [],
   });
 
   const flavors = [
@@ -51,6 +53,20 @@ function Editor({ submit }) {
       .map((o) => o.value);
 
     const newFields = { ...fields, [event.target.name]: options };
+    setFields(newFields);
+  };
+
+  const onInputChangeCheck = (event) => {
+    const newFields = { ...fields, [event.target.name]: event.target.checked };
+    setFields(newFields);
+  };
+
+  const onInputChangeOptionsCheck = (event) => {
+    const newToppings = [...fields.toppingsCheck];
+    event.target.checked
+      ? newToppings.push(event.target.name)
+      : newToppings.splice(newToppings.indexOf(event.target.name), 1);
+    const newFields = { ...fields, toppingsCheck: newToppings };
     setFields(newFields);
   };
 
@@ -113,6 +129,34 @@ function Editor({ submit }) {
               onChange={onInputChange}
             />
             <label className="form-check-label">{flavor}</label>
+          </div>
+        ))}
+      </div>
+      <div className="form-group">
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            name="twoscoops"
+            value={fields.twoScoops}
+            onChange={onInputChangeCheck}
+          ></input>
+          <label className="form-check-label">Two Scoops</label>
+        </div>
+      </div>
+      <div className="form-group">
+        <label>Ice Creame Toppings</label>
+        {toppings.map((top, i) => (
+          <div className="form-check" key={top}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              name={top}
+              value={fields.toppingsCheck[i]}
+              checked={fields.toppingsCheck.indexOf(top) > -1}
+              onChange={onInputChangeOptionsCheck}
+            ></input>
+            <label className="form-check-label">{top}</label>
           </div>
         ))}
       </div>
