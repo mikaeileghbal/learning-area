@@ -239,3 +239,75 @@ const developer = EmployeeFactory.make("Developer");
 console.log(manager.profile());
 console.log(teamlead.profile());
 console.log(developer.profile());
+
+// Observer Pattern
+// ================
+
+// Subject
+function Subject() {
+  this.observer_list = [];
+}
+
+Subject.prototype.add_observer = function (obj) {
+  console.log("Added observer");
+  this.observer_list.push(obj);
+};
+
+Subject.prototype.remove_observer = function (obj) {
+  for (let i = 0; i < this.observer_list.length; i++) {
+    if (this.observer_list[i] === obj) {
+      this.observer_list.splice(i, 1);
+      console.log("Removed observer");
+    }
+  }
+};
+
+Subject.prototype.notify = function () {
+  let arg = Array.prototype.slice.call(arguments, 0);
+  for (let i = 0; i < this.observer_list.length; i++) {
+    this.observer_list[i].update(arg);
+  }
+};
+
+// Observers
+const TweetUpdater = {
+  update: function () {
+    console.log(`Update Tweet - `, arguments);
+  },
+};
+
+const TweetFollower = {
+  update: function () {
+    console.log(`Following this tweet - `, arguments);
+  },
+};
+
+// Application
+function Tweeter() {
+  let subject = new Subject();
+
+  this.addObserver = function (observer) {
+    subject.add_observer(observer);
+  };
+
+  this.removeObserver = function (observer) {
+    subject.remove_observer(observer);
+  };
+
+  this.fetchTweet = function () {
+    const tweet = {
+      tweet: "This is a nice observer",
+    };
+
+    subject.notify(tweet);
+  };
+}
+
+// Using application
+const tweetApp = new Tweeter();
+
+tweetApp.addObserver(TweetUpdater);
+tweetApp.addObserver(TweetFollower);
+tweetApp.fetchTweet();
+tweetApp.removeObserver(TweetUpdater);
+tweetApp.removeObserver(TweetFollower);
