@@ -311,3 +311,5 @@ tweetApp.addObserver(TweetFollower);
 tweetApp.fetchTweet();
 tweetApp.removeObserver(TweetUpdater);
 tweetApp.removeObserver(TweetFollower);
+
+
