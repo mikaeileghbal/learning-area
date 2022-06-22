@@ -70,3 +70,60 @@ function returnObject() {
 }
 const { a3: x, b3: y, c3: z } = returnObject();
 console.log(x, y, z);
+
+const firstname = "Albert";
+const lastname = "Einstein";
+const person = {
+  firstname: firstname,
+  lastname: lastname,
+  getName: function () {
+    return this.firstname;
+  },
+};
+const personES6 = {
+  firstname,
+  lastname,
+  getName() {
+    return this.firstname;
+  },
+};
+
+console.log(person.getName());
+console.log(personES6.getName());
+
+// Tagged Template String
+
+function emmy(key, ...values) {
+  console.log(key);
+  console.log(values);
+}
+
+let category = "Best Movie";
+let movie = "Es6";
+emmy`And the award for ${category} goes to ${movie}`;
+
+function priceFilter(s, ...v) {
+  return s[0] + (v[0] + 5);
+}
+let default_discount = 20;
+let greeting = priceFilter`Your purchase has a discount of ${default_discount} percent`;
+console.log(greeting);
+
+// map
+let m = new Map([
+  [1, "Albert"],
+  [2, "Douglas"],
+  [3, "Cliver"],
+]);
+
+for (let a of m.entries()) {
+  console.log(a);
+}
+
+for (let a of m.keys()) {
+  console.log(a);
+}
+
+for (let a of m.values()) {
+  console.log(a);
+}
