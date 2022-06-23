@@ -127,3 +127,21 @@ for (let a of m.keys()) {
 for (let a of m.values()) {
   console.log(a);
 }
+
+// Iterator
+const myArray = [1, 2, 3];
+const iterator = myArray[Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+const days = ["Sunday", "Monday", "Tuesday"];
+
+// Keys
+for (let day in days) {
+  console.log(day);
+}
+// Values
+for (let day of days) {
+  console.log(day);
+}
