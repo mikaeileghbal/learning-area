@@ -145,3 +145,12 @@ for (let day in days) {
 for (let day of days) {
   console.log(day);
 }
+
+function CustomStr(str) {
+  this.str = str;
+}
+CustomStr.prototype.add = function (s) {
+  return s.map((a) => {
+    return this.str + a;
+  });
+};
