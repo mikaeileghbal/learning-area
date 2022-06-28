@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+  </head>
+  <body>
+    <p>Hello World!</p>
+
+    <form action="">
+      <fieldset>
+        <p>How are you feeling today?</p>
+        <input
+          type="radio"
+          id="feeling1"
+          name="feeling"
+          value="Happy"
+          checked
+        />
+        <label for="feeling1">Happy</label>
+        <input type="radio" id="feeling2" name="feeling" value="Sad" />
+        <label for="deeling2">Sad</label>
+        <br />
+        <input type="button" value="Submit" id="submit" />
+      </fieldset>
+      <p id="greeting">Hello there</p>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dom.js" defer></script>
+  </body>
+</html>
