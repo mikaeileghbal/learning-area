@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
+import FormValidator from "./FormValidator";
+import ValidationMessage from "./ValidationMessage";
 
 export default function Forms() {
   const [formData, setFormData] = useState({});
@@ -32,8 +34,13 @@ function Editor({ submit }) {
     flavorSecond: "",
     twoScoops: false,
     toppingsCheck: [],
+    order: "",
   });
 
+  const rules = {
+    name: { required: true, minlength: 3, alpha: true },
+    order: { require: true },
+  };
   const flavors = [
     "Chocolate",
     "Double Chocolate",
@@ -70,96 +77,109 @@ function Editor({ submit }) {
     setFields(newFields);
   };
 
-  useEffect(() => {
-    submit(fields);
-  }, [fields, submit]);
+  // useEffect(() => {
+  //   submit(fields);
+  // }, [fields, submit]);
 
   return (
     <div className="h5 bg-info text-white p-3">
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          className="form-control m-2"
-          name="name"
-          value={fields.name}
-          onChange={onInputChange}
-        ></input>
-      </div>
-      <div className="form-group">
-        <label>Ice Creame Flavors</label>
-        <select
-          className="form-control m-2"
-          name="flavor"
-          value={fields.flavor}
-          onChange={onInputChange}
-        >
-          {flavors.map((flavor) => (
-            <option value={flavor} key={flavor}>
-              {flavor}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <label>Ice Creame Toppings</label>
-        <select
-          className="form-control m-2"
-          name="toppings"
-          value={fields.toppings}
-          multiple={true}
-          onChange={onInputChangeOptions}
-        >
-          {toppings.map((topping) => (
-            <option value={topping} key={topping}>
-              {topping}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <label>Ice Creame Flavor</label>
-        {flavors.map((flavor) => (
-          <div className="form-check" key={flavor}>
-            <input
-              className="form-check-input"
-              type="radio"
-              name="flavorSecond"
-              value={flavor}
-              checked={fields.flavorSecond === flavor}
-              onChange={onInputChange}
-            />
-            <label className="form-check-label">{flavor}</label>
-          </div>
-        ))}
-      </div>
-      <div className="form-group">
-        <div className="form-check">
+      <FormValidator data={fields} rules={rules} submit={submit}>
+        <div className="form-group">
+          <label>Name</label>
           <input
-            className="form-check-input"
-            type="checkbox"
-            name="twoscoops"
-            value={fields.twoScoops}
-            onChange={onInputChangeCheck}
-          ></input>
-          <label className="form-check-label">Two Scoops</label>
+            className="form-control m-2"
+            name="name"
+            value={fields.name}
+            onChange={onInputChange}
+          />
+
+          <ValidationMessage field="name" />
         </div>
-      </div>
-      <div className="form-group">
-        <label>Ice Creame Toppings</label>
-        {toppings.map((top, i) => (
-          <div className="form-check" key={top}>
+        <div className="form-group">
+          <label>Ice Creame Flavors</label>
+          <select
+            className="form-control m-2"
+            name="flavor"
+            value={fields.flavor}
+            onChange={onInputChange}
+          >
+            {flavors.map((flavor) => (
+              <option value={flavor} key={flavor}>
+                {flavor}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Ice Creame Toppings</label>
+          <select
+            className="form-control m-2"
+            name="toppings"
+            value={fields.toppings}
+            multiple={true}
+            onChange={onInputChangeOptions}
+          >
+            {toppings.map((topping) => (
+              <option value={topping} key={topping}>
+                {topping}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Ice Creame Flavor</label>
+          {flavors.map((flavor) => (
+            <div className="form-check" key={flavor}>
+              <input
+                className="form-check-input"
+                type="radio"
+                name="flavorSecond"
+                value={flavor}
+                checked={fields.flavorSecond === flavor}
+                onChange={onInputChange}
+              />
+              <label className="form-check-label">{flavor}</label>
+            </div>
+          ))}
+        </div>
+        <div className="form-group">
+          <div className="form-check">
             <input
               className="form-check-input"
               type="checkbox"
-              name={top}
-              value={fields.toppingsCheck[i]}
-              checked={fields.toppingsCheck.indexOf(top) > -1}
-              onChange={onInputChangeOptionsCheck}
+              name="twoscoops"
+              value={fields.twoScoops}
+              onChange={onInputChangeCheck}
             ></input>
-            <label className="form-check-label">{top}</label>
+            <label className="form-check-label">Two Scoops</label>
           </div>
-        ))}
-      </div>
+        </div>
+        <div className="form-group">
+          <label>Ice Creame Toppings</label>
+          {toppings.map((top, i) => (
+            <div className="form-check" key={top}>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name={top}
+                value={fields.toppingsCheck[i]}
+                checked={fields.toppingsCheck.indexOf(top) > -1}
+                onChange={onInputChangeOptionsCheck}
+              ></input>
+              <label className="form-check-label">{top}</label>
+            </div>
+          ))}
+        </div>
+        <div className="form-group">
+          <label>Order</label>
+          <textarea
+            className="form-control"
+            name="order"
+            value={fields.order}
+            onChange={onInputChange}
+          ></textarea>
+        </div>
+      </FormValidator>
     </div>
   );
 }
