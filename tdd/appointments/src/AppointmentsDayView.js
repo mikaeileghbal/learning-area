@@ -1,14 +1,5 @@
 import React, { useState } from "react";
 
-const appointmentTimeOfDay = (startsAt) => {
-  const [h, m] = new Date(startsAt).toTimeString().split(":");
-  return `${h}:${m}`;
-};
-
-export const Appointment = ({ customer }) => {
-  return <div>{customer.firstName}</div>;
-};
-
 export const AppointmentsDayView = ({ appointments = [] }) => {
   const [selectedAppointment, setSelectedAppointment] = useState(0);
 
@@ -35,4 +26,30 @@ export const AppointmentsDayView = ({ appointments = [] }) => {
       )}
     </div>
   );
+};
+
+export const Appointment = ({ customer, startsAt, phone }) => {
+  return (
+    <div>
+      <h1>Today's appointment at {appointmentTimeOfDay(startsAt)}</h1>
+      <table>
+        <tr>
+          <th scope="row">Customer</th>
+          <td>
+            {customer.firstName} {customer.lastname}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Phone number</th>
+          <td>{phone}</td>
+        </tr>
+      </table>
+      <h5>Curstomer {customer.firstName}</h5>
+    </div>
+  );
+};
+
+const appointmentTimeOfDay = (startsAt) => {
+  const [h, m] = new Date(startsAt).toTimeString().split(":");
+  return `${h}:${m}`;
 };
