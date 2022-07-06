@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useMemo, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useLayoutEffect,
+  useReducer,
+} from "react";
 import useMousePosition from "../custom-hooks/useMousePosition";
 import useWindowSize from "../custom-hooks/useWindowSize";
 
@@ -34,6 +40,30 @@ export default function Hooks() {
           x:{x}, y:{y}
         </div>
       </p>
+      <p>
+        <Checkbox />
+      </p>
     </div>
+  );
+}
+
+function toggleReducer(state) {
+  return !state;
+}
+
+function addReducer(state, amount) {
+  return state + amount;
+}
+
+function Checkbox() {
+  const [checked, toggleDispatch] = useReducer(toggleReducer, false);
+  const [number, setNumber] = useReducer(addReducer, 0);
+
+  return (
+    <>
+      <input type="checkbox" value={checked} onChange={toggleDispatch} />
+      {checked ? "Checked" : "Unchecked"}
+      <p onClick={() => setNumber(2)}> {number}</p>
+    </>
   );
 }
