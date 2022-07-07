@@ -11,6 +11,12 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <style>
+      body {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+    </style>
 
     <title>Bootstrap Components</title>
   </head>
@@ -133,6 +139,40 @@
       fields below.
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
+
+    <!-- Badges -->
+    <button class="btn btn-primary" type="button">
+      Notification <span class="badge bg-secondary">4</span>
+    </button>
+    <button type="button" class="btn btn-primary position-relative">
+      Inbox
+      <span
+        class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"
+        >99+</span
+      >
+    </button>
+    <button type="button" class="btn btn-primary position-relative ms-4">
+      Profile<span
+        class="bg-danger border border-light rounded-circle p-2 position-absolute top-0 start-100 translate-middle"
+      ></span>
+    </button>
+
+    <!-- Breadcrumb -->
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Library</li>
+      </ol>
+    </nav>
+
+    <nav style="--bs-breadcrumb-divider: '>'">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item"><a href="">Library</a></li>
+        <li class="breadcrumb-item active">Data</li>
+      </ol>
+    </nav>
+
     <!-- Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
