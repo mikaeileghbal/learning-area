@@ -83,7 +83,7 @@ function CatList() {
   return (
     <>
       {cats.map((cat, i) => (
-        <RenderCatOnce
+        <ControlRenderCat
           key={i}
           name={cat}
           meow={(name) => console.log(`${name} has meowed`)}
@@ -99,9 +99,9 @@ function Cat({ name, meow = (f) => f }) {
 }
 
 //const PureCat = memo(Cat);
-const RenderCatOnce = memo(Cat, () => true);
-// const AlwaysRenderCat = memo(Cat, () => false);
-// const ControlRenderCat = memo(
-//   Cat,
-//   (prevProps, nextProps) => prevProps.prevProps.name === nextProps.name
-// );
+//const RenderCatOnce = memo(Cat, () => true);
+//const AlwaysRenderCat = memo(Cat, () => false);
+const ControlRenderCat = memo(
+  Cat,
+  (prevProps, nextProps) => prevProps.name === nextProps.name
+);

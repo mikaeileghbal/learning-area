@@ -18,4 +18,5 @@ root2.render(<Virtualize />);
 const rootGithubUser = ReactDOM.createRoot(
   document.getElementById("githubUser")
 );
+
 rootGithubUser.render(<GithubApp />);
