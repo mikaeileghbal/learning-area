@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, {
   useState,
   useEffect,
   useMemo,
   useLayoutEffect,
   useReducer,
+  memo,
 } from "react";
 import useMousePosition from "../custom-hooks/useMousePosition";
 import useWindowSize from "../custom-hooks/useWindowSize";
@@ -43,6 +45,9 @@ export default function Hooks() {
       <p>
         <Checkbox />
       </p>
+      <p>
+        <CatList />
+      </p>
     </div>
   );
 }
@@ -67,3 +72,36 @@ function Checkbox() {
     </>
   );
 }
+
+function CatList() {
+  const [cats, setCats] = useState(["Biscuit", "Jungle", "Outlaw"]);
+
+  const addCat = (cat) => {
+    setCats([...cats, cat]);
+  };
+
+  return (
+    <>
+      {cats.map((cat, i) => (
+        <ControlRenderCat
+          key={i}
+          name={cat}
+          meow={(name) => console.log(`${name} has meowed`)}
+        />
+      ))}
+      <button onClick={() => addCat("newCat")}>Add a cat</button>
+    </>
+  );
+}
+function Cat({ name, meow = (f) => f }) {
+  console.log(`rendering ${name}`);
+  return <p onClick={() => meow(name)}>{name}</p>;
+}
+
+//const PureCat = memo(Cat);
+//const RenderCatOnce = memo(Cat, () => true);
+//const AlwaysRenderCat = memo(Cat, () => false);
+const ControlRenderCat = memo(
+  Cat,
+  (prevProps, nextProps) => prevProps.name === nextProps.name
+);
