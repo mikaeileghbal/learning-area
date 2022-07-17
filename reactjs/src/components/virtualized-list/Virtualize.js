@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import getData from "./data";
 
 import { FixedSizeList } from "react-window";
@@ -23,4 +23,15 @@ export default function Virtualize() {
       {renderItem}
     </FixedSizeList>
   );
+}
+
+export function useMountedRef() {
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => (mounted.current = false);
+  });
+
+  return mounted;
 }

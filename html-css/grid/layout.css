@@ -1,0 +1,56 @@
+header,
+main,
+aside,
+footer {
+  padding: 2em;
+  border-radius: 0.25em;
+  border: 2px solid;
+}
+
+header {
+  background-color: rgba(242, 46, 138, 0.8);
+  border-color: rgb(242, 46, 138);
+  grid-area: header;
+}
+
+main {
+  background-color: rgba(98, 205, 217, 0.8);
+  border-color: rgb(98, 205, 217);
+  min-height: 400px;
+  grid-area: content;
+}
+
+aside {
+  background-color: rgba(117, 191, 6, 0.8);
+  border-color: rgb(117, 191, 6);
+  grid-area: aside;
+}
+
+footer {
+  background-color: rgba(242, 226, 5, 0.8);
+  border-color: rgb(242, 226, 5);
+  grid-area: footer;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "aside"
+    "footer";
+  gap: 0.2em;
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: 100px 1fr auto auto;
+    grid-template-areas:
+      "header header"
+      "content aside"
+      "footer aside";
+  }
+}
