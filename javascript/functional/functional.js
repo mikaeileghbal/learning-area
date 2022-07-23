@@ -34,13 +34,56 @@ function billTheUSerOnce(name) {
   }, 4000);
 }
 
+// Once and After
 const onceAndAfter = (f, g = () => {}) => {
   let done = false;
   return (...args) => {
     if (!done) {
+      done = true;
       f(...args);
     } else {
       g(...args);
     }
   };
 };
+
+function doFirst() {
+  console.log("First call this");
+}
+
+function doSecond() {
+  console.log("Then call this");
+}
+
+const firstAndThen = onceAndAfter(doFirst, doSecond);
+
+pay.addEventListener("click", firstAndThen);
+
+// =========
+// functions
+//==========
+
+function ShowItself(identity) {
+  this.identity = identity;
+
+  // 1
+  that = this;
+  setTimeout(function () {
+    console.log(that.identity);
+  }, 1000);
+
+  // 2
+  setTimeout(
+    function () {
+      console.log(this.identity);
+    }.bind(this),
+    1000
+  );
+
+  // 3
+  setTimeout(() => {
+    console.log(this.identity);
+  }, 1000);
+}
+
+const x = new ShowItself("functionlal");
