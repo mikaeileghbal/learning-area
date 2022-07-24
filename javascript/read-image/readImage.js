@@ -33,7 +33,6 @@ inputFile.addEventListener("change", getImageFile);
 
 function getImageFile() {
   const [imageFile] = inputFile.files;
-
   if (imageFile) {
     const reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -52,7 +51,6 @@ multiFile.addEventListener("change", previewFiles);
 function previewFiles() {
   const preview = document.getElementById("preview");
   const files = multiFile.files;
-
   if (files) {
     [].forEach.call(files, (file) => readAndPreview(file, appendImage));
   }
@@ -60,11 +58,9 @@ function previewFiles() {
   function readAndPreview(file, callBack) {
     if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
       const reader = new FileReader();
-
       reader.addEventListener("load", () => {
         callBack(reader.result);
       });
-
       reader.readAsDataURL(file);
     } else {
       console.log("Please provide image files...");
