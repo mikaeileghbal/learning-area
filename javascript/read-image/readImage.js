@@ -59,7 +59,7 @@ function previewFiles() {
     if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        callBack(reader.result);
+        callBack(reader.result, file);
       });
       reader.readAsDataURL(file);
     } else {
@@ -67,10 +67,88 @@ function previewFiles() {
     }
   }
 
-  function appendImage(image) {
+  function appendImage(image, file) {
     console.log(image);
     const img = document.createElement("img");
     img.src = image;
+    img.file = file;
+    img.classList.add("file");
     preview.appendChild(img);
   }
+}
+
+// Upload file
+
+document.getElementById("upload").addEventListener("click", sendFiles);
+
+function sendFiles() {
+  console.log("clicked");
+  const imgs = document.querySelectorAll(".file");
+
+  for (let i = 0; i < imgs.length; i++) {
+    new FileUpload(imgs[i], imgs[i].file);
+  }
+}
+
+function FileUpload(img, file) {
+  const reader = new FileReader();
+  this.ctrl = createThrobber(img);
+  const xhr = new XMLHttpRequest();
+  this.xhr = xhr;
+
+  const self = this;
+  this.xhr.upload.addEventListener(
+    "progress",
+    function (e) {
+      if (e.lengthComputable) {
+        const percentage = Math.round((e.loaded * 100) / e.total);
+        self.ctrl.update(percentage);
+      }
+    },
+    false
+  );
+
+  xhr.upload.addEventListener(
+    "load",
+    function (e) {
+      self.ctrl.update(100);
+      const canvas = self.ctrl.ctx.canvas;
+      canvas.parentNode.removeChild(canvas);
+    },
+    false
+  );
+  xhr.open(
+    "POST",
+    "http://demos.hacks.mozilla.org/paul/demos/resources/webservices/devnull.php"
+  );
+  xhr.overrideMimeType("text/plain; charset=x-user-defined-binary");
+  reader.onload = function (evt) {
+    xhr.send(evt.target.result);
+  };
+  reader.readAsBinaryString(file);
+}
+
+function createThrobber(img) {
+  const throbberWidth = 64;
+  const throbberHeight = 6;
+  const throbber = document.createElement("canvas");
+  throbber.classList.add("upload-progress");
+  throbber.setAttribute("width", throbberWidth);
+  throbber.setAttribute("height", throbberHeight);
+  img.parentNode.appendChild(throbber);
+  throbber.ctx = throbber.getContext("2d");
+  throbber.ctx.fillStyle = "orange";
+  throbber.update = function (percent) {
+    throbber.ctx.fillRect(
+      0,
+      0,
+      (throbberWidth * percent) / 100,
+      throbberHeight
+    );
+    if (percent === 100) {
+      throbber.ctx.fillStyle = "green";
+    }
+  };
+  throbber.update(0);
+  return throbber;
 }

@@ -13,6 +13,10 @@ fetch("product.json")
     console.log(`Fetch problem : ${err.message}`);
   });
 
+/**
+ *
+ * @param {array} products
+ */
 function initialize(products) {
   const category = document.querySelector("#category");
   const searchTerm = document.querySelector("#searchTerm");
@@ -33,6 +37,11 @@ function initialize(products) {
 
   searchBtn.addEventListener("click", selectCategory);
 
+  /**
+   *
+   * @param {*} e
+   * @returns {*}
+   */
   function selectCategory(e) {
     e.preventDefault();
 
@@ -61,6 +70,10 @@ function initialize(products) {
       }
     }
   }
+
+  /**
+   * return {*}
+   */
   function selectProducts() {
     if (searchTerm.value.trim() === "") {
       finalGroup = categoryGroup;
@@ -73,6 +86,9 @@ function initialize(products) {
     updateDisplay();
   }
 
+  /**
+   *
+   */
   function updateDisplay() {
     while (main.firstChild) {
       main.removeChild(main.firstChild);
@@ -89,6 +105,10 @@ function initialize(products) {
     }
   }
 
+  /**
+   *
+   * @param {array} product
+   */
   function fetchBlob(product) {
     const url = `images/${product.image}`;
 
@@ -106,6 +126,11 @@ function initialize(products) {
       });
   }
 
+  /**
+   *
+   * @param {*} blob
+   * @param {*} product
+   */
   function showProduct(blob, product) {
     const objectURL = URL.createObjectURL(blob);
     const section = document.createElement("section");
