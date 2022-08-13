@@ -87,3 +87,116 @@ function ShowItself(identity) {
 }
 
 const x = new ShowItself("functionlal");
+
+function getAjax() {
+  let ajax = null;
+  if (window.XMLHttpRequest) {
+    ajax = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    ajax = new ActiveXObject();
+  } else {
+    throw new Error("No ajax supported!");
+  }
+  return ajax;
+}
+
+// Everytime that the getAjax is called
+// All the checks will be run again
+const ajax = getAjax();
+const ajacs2 = getAjax();
+
+(function initializeGetAjax() {
+  let myAjax = null;
+  if (window.XMLHttpRequest) {
+    myAjax = function () {
+      return new XMLHttpRequest();
+    };
+  } else if (window.ActiveXObject) {
+    myAjax = function () {
+      return new ActiveXObject();
+    };
+  } else {
+    myAjax = function () {
+      throw new Error("No ajax supported!");
+    };
+  }
+  window.getAjax = myAjax;
+})();
+
+const newAjax = getAjax();
+
+console.log(newAjax);
+
+const DEVELOPMENT = true;
+
+const myLog = DEVELOPMENT
+  ? (sometext) => console.log(sometext)
+  : (sometext) => {};
+
+const myCounter = (function () {
+  let count = 0;
+  return function () {
+    count++;
+    return count;
+  };
+})();
+
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
+
+const arr = [1, 2, 3];
+
+const loging = (...arr) => (console.log(...arr), console.log("ok"));
+
+loging(1, 2, 3);
+
+const person = {
+  name: "mike",
+};
+
+function printName() {
+  console.log(this.name);
+}
+
+const fn = printName.bind(person);
+fn();
+
+Function.prototype.myBind = function (obj) {
+  let func = this;
+  return function () {
+    func.apply(obj);
+  };
+};
+
+const fn2 = printName.myBind(person);
+console.log("name: ", fn2());
+
+// Pure functions
+
+const cache = [];
+
+function fibonacci(n) {
+  if (cache[n] === undefined) {
+    if (n <= 1) {
+      cache[n] = n;
+    } else {
+      cache[n] = fibonacci(n - 2) + fibonacci(n - 1);
+    }
+  }
+  return cache[n];
+}
+
+// injecting impure functions
+
+function randowmLetterFunc() {}
+
+const getRandomFileName = (fileExtention = "", randomLetterFunc) => {
+  const NAME_LENGTH = 12;
+  let namePart = new Array(NAME_LENGTH);
+  for (let i = 0; i < NAME_LENGTH; i++) {
+    namePart[i] = randomLetterFunc();
+  }
+  return namePart.join("") + fileExtention;
+};

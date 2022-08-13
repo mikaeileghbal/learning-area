@@ -45,3 +45,4 @@ fetch("url").then((data) => {
 });
 
 fetch("url").then(someOtherFunction);
+
