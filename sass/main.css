@@ -1,6 +1,5 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -24,41 +23,25 @@ body {
 }
 
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 60%;
   margin: 0 auto;
 }
-
 .main .main__paragraph1, .main .main__paragraph2 {
   font-weight: 700;
 }
-
 .main .main__paragraph1:hover, .main .main__paragraph2:hover {
   color: pink;
 }
-
 .main .main__paragraph2:hover {
   color: red;
 }
-
 @media screen and (max-width: 800px) {
   .main {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
 }
 
@@ -75,15 +58,13 @@ body {
   margin-right: auto;
 }
 
-.action-buttons, .reset-buttons {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+.reset-buttons, .action-buttons {
+  box-sizing: border-box;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding: 16px 0;
   width: 150px;
 }
-
-.action-buttons:hover, .reset-buttons:hover {
+.reset-buttons:hover, .action-buttons:hover {
   border: 2px solid rgba(0, 0, 0, 0.5);
 }
 
@@ -96,15 +77,14 @@ body {
 }
 
 .pulse {
-  -webkit-animation-name: inline-ud3b96ec8;
-          animation-name: inline-ud3b96ec8;
+  -webkit-animation-name: inline-ul6hgm6;
+          animation-name: inline-ul6hgm6;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
 }
-
-@-webkit-keyframes inline-ud3b96ec8 {
+@-webkit-keyframes inline-ul6hgm6 {
   from {
     background-color: yellow;
   }
@@ -112,13 +92,11 @@ body {
     background-color: red;
   }
 }
-
-@keyframes inline-ud3b96ec8 {
+@keyframes inline-ul6hgm6 {
   from {
     background-color: yellow;
   }
   to {
     background-color: red;
   }
-}
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */

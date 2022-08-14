@@ -1,8 +1,8 @@
-[class^="container"] {
+[class^=container] {
   background-color: red;
 }
 
-[class^="col"] {
+[class^=col] {
   padding: 8px;
   background-color: aliceblue;
   border: 1px solid silver;
@@ -12,5 +12,4 @@
   height: 200px;
   border: 1px solid black;
   margin: 2px;
-}
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */
