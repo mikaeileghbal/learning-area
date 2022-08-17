@@ -84,3 +84,5 @@ lett.addLetter("e");
 
 console.log(lett.word());
 console.log(lett.word2());
+
+

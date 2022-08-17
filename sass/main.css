@@ -77,14 +77,14 @@ body {
 }
 
 .pulse {
-  -webkit-animation-name: inline-ul6hgm6;
-          animation-name: inline-ul6hgm6;
+  -webkit-animation-name: inline-umw4hv6;
+          animation-name: inline-umw4hv6;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
 }
-@-webkit-keyframes inline-ul6hgm6 {
+@-webkit-keyframes inline-umw4hv6 {
   from {
     background-color: yellow;
   }
@@ -92,7 +92,7 @@ body {
     background-color: red;
   }
 }
-@keyframes inline-ul6hgm6 {
+@keyframes inline-umw4hv6 {
   from {
     background-color: yellow;
   }
