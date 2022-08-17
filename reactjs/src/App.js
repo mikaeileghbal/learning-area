@@ -9,12 +9,16 @@ import RenderProps from "./components/RenderProps/RenderProps";
 import SignUp from "./components/forms/SignUp";
 import Query from "./graphql/query";
 import Hooks from "./components/hooks/Hooks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Components</h1>
+        <FontAwesomeIcon icon={"arrow-alt-right"} />
+        <FontAwesomeIcon icon={"facebook"} />
+        <FontAwesomeIcon icon={"twitter"} />
       </header>
       <main className="app-main">
         <div className="component-container">
